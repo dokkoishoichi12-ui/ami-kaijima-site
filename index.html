@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>海島亜美 AMI KAIJIMA | 画家・アーティスト</title>
+<meta name="description" content="画家・アーティスト 海島亜美(AMI KAIJIMA / AmiKaijima)の公式サイト。広島市・Oh Studio Hiroshima を拠点に「思考迷路」をテーマに制作しています。">
+<meta property="og:title" content="海島亜美 AMI KAIJIMA">
+<meta property="og:description" content="画家・アーティスト 海島亜美(AMI KAIJIMA)の公式サイト">
+<meta property="og:type" content="website">
+<!-- 仮フォント(無料):英字 Marcellus / 日本語 Zen Kaku Gothic New。本番フォントは Ami の選択後に差し替え -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfaf7; --text:#1f1f1f; --muted:#6b6b66; --line:#e3e1db; --accent:#1f1f1f;
+    --font-en:"Optima","Marcellus",serif;
+    --font-ja:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-en),var(--font-ja);
+    font-size:15px;line-height:1.9;letter-spacing:.03em;overflow-x:hidden}
+  img{max-width:100%;height:auto;display:block}
+  a{color:inherit}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+
+  /* 告知バー:ここを書き換えるだけでイベント告知を差し替え */
+  .notice{border-bottom:1px solid var(--line);font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
+  .notice a{text-decoration:underline;text-underline-offset:3px}
+
+  header{padding:56px 0 40px;text-align:center}
+  .name-en{font-family:var(--font-en);font-size:clamp(26px,7vw,40px);letter-spacing:.25em;font-weight:400}
+  .name-ja{font-family:var(--font-ja);font-size:13px;color:var(--muted);margin-top:6px;letter-spacing:.3em}
+  nav{margin-top:28px;display:flex;justify-content:center;gap:28px;font-family:var(--font-en);font-size:13px;letter-spacing:.2em}
+  nav a{text-decoration:none}
+
+  section{padding:48px 0;border-top:1px solid var(--line)}
+  h2{font-family:var(--font-en);font-weight:400;font-size:14px;letter-spacing:.3em;margin-bottom:28px;text-align:center}
+
+  /* 作品 */
+  .works{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:640px){.works{grid-template-columns:1fr 1fr;gap:48px 32px}}
+  .work .ph{aspect-ratio:4/5;background:#efede8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+  .work .cap{margin-top:12px;font-size:13px;line-height:1.7}
+  .work .cap .t{font-size:14px}
+  .work .cap .meta{color:var(--muted)}
+  .tbd{color:#a0522d;font-size:12px}
+  .shop-note{margin-top:36px;font-size:13px;text-align:center;color:var(--muted)}
+
+  /* プロフィール */
+  .profile{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+  .profile .photo{width:96px;height:96px;border-radius:50%;background:#efede8;overflow:hidden;font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+  .profile p{font-family:var(--font-ja);font-size:14px;max-width:32em}
+
+  /* 連絡先・リンク */
+  .contact{text-align:center;font-size:14px}
+  .contact .mail{font-family:var(--font-en);font-size:16px;letter-spacing:.05em;word-break:break-all}
+  .links{list-style:none;margin-top:28px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;font-family:var(--font-en);font-size:13px;letter-spacing:.1em}
+  .links a{text-decoration:none;border-bottom:1px solid var(--line)}
+
+  footer{padding:40px 0 56px;text-align:center;font-size:11px;color:var(--muted);letter-spacing:.15em;font-family:var(--font-en)}
+</style>
+</head>
+<body>
+
+<!-- ▼ イベント告知(ここだけ書き換え。告知がない時期は div ごと削除) -->
+<div class="notice">
+  【要確認】次回の展示・イベント情報をここに入れます
+</div>
+<!-- ▲ イベント告知 -->
+
+<header class="wrap">
+  <h1 class="name-en">AMI KAIJIMA</h1>
+  <p class="name-ja">海島亜美</p>
+  <nav>
+    <a href="#works">WORKS</a>
+    <a href="#profile">PROFILE</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section id="works">
+    <h2>WORKS</h2>
+    <div class="works">
+      <!-- 作品1件分。写真が届いたら .ph を <img src="images/xxx.jpg" alt="作品名"> に置き換え -->
+      <article class="work">
+        <div class="ph">作品写真 準備中</div>
+        <div class="cap">
+          <div class="t">タイトル <span class="tbd">要確認</span></div>
+          <div class="meta">技法・サイズ・制作年 <span class="tbd">要確認</span></div>
+          <div class="meta">価格 <span class="tbd">要確認</span></div>
+        </div>
+      </article>
+      <article class="work">
+        <div class="ph">作品写真 準備中</div>
+        <div class="cap">
+          <div class="t">タイトル <span class="tbd">要確認</span></div>
+          <div class="meta">技法・サイズ・制作年 <span class="tbd">要確認</span></div>
+          <div class="meta">価格 <span class="tbd">要確認</span></div>
+        </div>
+      </article>
+    </div>
+    <p class="shop-note">作品のご購入・ご相談は、メールまたは Instagram の DM からお気軽にどうぞ。<br>グッズは <a href="https://suzuri.jp/AMIKAIJIMA" target="_blank" rel="noopener">SUZURI</a> でお求めいただけます。</p>
+  </section>
+
+  <section id="profile">
+    <h2>PROFILE</h2>
+    <div class="profile">
+      <div class="photo">写真</div>
+      <!-- 自己紹介文は Ami 本人の文章をそのまま入れる -->
+      <p>【要確認】Ami さんご本人の自己紹介文をここにそのまま入れます。</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>CONTACT</h2>
+    <div class="contact">
+      <p>作品のご相談・ご依頼はこちらへ</p>
+      <p class="mail"><a href="mailto:kaijimaami@gmail.com">kaijimaami@gmail.com</a></p>
+      <p style="font-size:13px;color:var(--muted)">Instagram の DM でも承っています</p>
+      <ul class="links">
+        <li><a href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@ami_kaijima" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://x.com/AMI_KAIJIMA" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://www.threads.net/@amikaijima" target="_blank" rel="noopener">Threads</a></li>
+        <li><a href="https://suzuri.jp/AMIKAIJIMA" target="_blank" rel="noopener">SUZURI</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>© AMI KAIJIMA</footer>
+</body>
+</html>
