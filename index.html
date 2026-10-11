@@ -4,136 +4,266 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>海島亜美 AMI KAIJIMA | 画家・アーティスト</title>
-<meta name="description" content="画家・アーティスト 海島亜美(AMI KAIJIMA / AmiKaijima)の公式サイト。広島市・Oh Studio Hiroshima を拠点に「思考迷路」をテーマに制作しています。">
+<meta name="description" content="画家・アーティスト 海島亜美(AMI KAIJIMA / AmiKaijima)の公式サイト。広島市・Oh Studio Hiroshima を拠点に「思考迷路」を描いています。">
 <meta property="og:title" content="海島亜美 AMI KAIJIMA">
 <meta property="og:description" content="画家・アーティスト 海島亜美(AMI KAIJIMA)の公式サイト">
 <meta property="og:type" content="website">
-<!-- 仮フォント(無料):英字 Marcellus / 日本語 Zen Kaku Gothic New。本番フォントは Ami の選択後に差し替え -->
+<meta property="og:image" content="img/wakeup.webp">
+<!-- フォント:英字 Marcellus / 日本語 Zen Kaku Gothic New(無料。Apple端末では英字に Optima が出ます) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fbfaf7; --text:#1f1f1f; --muted:#6b6b66; --line:#e3e1db; --accent:#1f1f1f;
+    --bg:#fbfaf7; --text:#1f1f1f; --muted:#6b6b66; --line:#e3e1db; --soft:#efede8; --tbd:#a0522d;
     --font-en:"Optima","Marcellus",serif;
     --font-ja:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:var(--font-en),var(--font-ja);
     font-size:15px;line-height:1.9;letter-spacing:.03em;overflow-x:hidden}
   img{max-width:100%;height:auto;display:block}
   a{color:inherit}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px}
+  .tbd{color:var(--tbd);font-size:12px;white-space:nowrap}
+  .en{font-family:var(--font-en)}
 
-  /* 告知バー:ここを書き換えるだけでイベント告知を差し替え */
+  /* お知らせバー(1行) */
   .notice{border-bottom:1px solid var(--line);font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
   .notice a{text-decoration:underline;text-underline-offset:3px}
 
-  header{padding:56px 0 40px;text-align:center}
+  header{padding:48px 0 0;text-align:center}
   .name-en{font-family:var(--font-en);font-size:clamp(26px,7vw,40px);letter-spacing:.25em;font-weight:400}
-  .name-ja{font-family:var(--font-ja);font-size:13px;color:var(--muted);margin-top:6px;letter-spacing:.3em}
-  nav{margin-top:28px;display:flex;justify-content:center;gap:28px;font-family:var(--font-en);font-size:13px;letter-spacing:.2em}
+  .name-ja{font-family:var(--font-ja);font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3em}
+  nav{margin:24px 0 0;padding:12px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 22px;
+    font-family:var(--font-en);font-size:12px;letter-spacing:.2em;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   nav a{text-decoration:none}
 
-  section{padding:48px 0;border-top:1px solid var(--line)}
-  h2{font-family:var(--font-en);font-weight:400;font-size:14px;letter-spacing:.3em;margin-bottom:28px;text-align:center}
+  section{padding:56px 0 0}
+  h2{font-family:var(--font-en);font-weight:400;font-size:14px;letter-spacing:.3em;margin-bottom:24px;text-align:center}
+  h3{font-weight:500;font-size:17px;line-height:1.6;margin-bottom:12px}
+  p{margin-bottom:1em}
+  .cap{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.7}
 
-  /* 作品 */
-  .works{display:grid;grid-template-columns:1fr;gap:40px}
-  @media(min-width:640px){.works{grid-template-columns:1fr 1fr;gap:48px 32px}}
-  .work .ph{aspect-ratio:4/5;background:#efede8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
-  .work .cap{margin-top:12px;font-size:13px;line-height:1.7}
-  .work .cap .t{font-size:14px}
-  .work .cap .meta{color:var(--muted)}
-  .tbd{color:#a0522d;font-size:12px}
-  .shop-note{margin-top:36px;font-size:13px;text-align:center;color:var(--muted)}
+  /* NEWS */
+  .event{border:1px solid var(--line);background:#fff;padding:24px 20px}
+  .event .label{font-family:var(--font-en);font-size:11px;letter-spacing:.25em;color:var(--muted)}
+  .event h3{font-family:var(--font-en);font-size:26px;font-weight:400;letter-spacing:.08em;margin:4px 0 2px}
+  .event .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+  .facts{display:grid;grid-template-columns:5em 1fr;gap:6px 12px;font-size:14px;margin-bottom:18px}
+  .facts dt{color:var(--muted)}
+  .facts dd{min-width:0}
+  .steps{padding-left:1.4em;font-size:14px;margin-bottom:16px}
+  .steps li{margin-bottom:4px}
+  .note{font-size:12px;color:var(--muted);margin:0}
 
-  /* プロフィール */
-  .profile{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
-  .profile .photo{width:96px;height:96px;border-radius:50%;background:#efede8;overflow:hidden;font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:center}
-  .profile p{font-family:var(--font-ja);font-size:14px;max-width:32em}
+  /* WORKS */
+  .hero-work{margin:0 -16px}
+  @media(min-width:640px){.hero-work{margin:0}}
+  .lead-q{text-align:center;font-family:var(--font-ja);font-size:15px;margin:28px auto 32px;max-width:24em}
+  .series{list-style:none;border-top:1px solid var(--line);margin:28px 0 0}
+  .series li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .series .s{color:var(--muted);font-size:13px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+  .grid2 .wide{grid-column:1/-1}
+  .grid2 img{width:100%;height:100%;object-fit:cover}
+  .sub-h{margin-top:48px;text-align:center}
+  .sub-h .en{font-size:11px;letter-spacing:.25em;color:var(--muted)}
 
-  /* 連絡先・リンク */
+  /* PROFILE */
+  .profile{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .profile .photo{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:50% 25%;margin-bottom:16px}
+  .profile .nm{font-size:15px;margin-bottom:2px}
+  .profile .nm .en{font-size:12px;letter-spacing:.15em;color:var(--muted);margin-left:.6em}
+  .profile .base{font-size:13px;color:var(--muted);margin-bottom:18px}
+  .profile p{font-family:var(--font-ja);font-size:14px;max-width:30em}
+
+  /* HISTORY */
+  .history{list-style:none;border-top:1px solid var(--line)}
+  .history li{display:grid;grid-template-columns:4.8em 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.7}
+  .history time{font-family:var(--font-en);color:var(--muted);font-variant-numeric:tabular-nums}
+  .history li>div{min-width:0;overflow-wrap:anywhere}
+  .history span{display:block;color:var(--muted);font-size:12px}
+
+  /* SHOP */
+  .cards{display:grid;gap:12px}
+  @media(min-width:640px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{border:1px solid var(--line);background:#fff;padding:18px;text-decoration:none;display:block;font-size:13px;line-height:1.8}
+  .card b{display:block;font-weight:500;font-size:15px;margin-bottom:4px}
+  .card .go{display:block;margin-top:8px;font-family:var(--font-en);font-size:11px;letter-spacing:.2em;color:var(--muted)}
+
+  /* CONTACT */
   .contact{text-align:center;font-size:14px}
-  .contact .mail{font-family:var(--font-en);font-size:16px;letter-spacing:.05em;word-break:break-all}
-  .links{list-style:none;margin-top:28px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;font-family:var(--font-en);font-size:13px;letter-spacing:.1em}
+  .contact .mail{font-family:var(--font-en);font-size:17px;letter-spacing:.04em;word-break:break-all;margin:4px 0}
+  .links{list-style:none;margin-top:24px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;font-family:var(--font-en);font-size:13px;letter-spacing:.1em}
   .links a{text-decoration:none;border-bottom:1px solid var(--line)}
+  .studio{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;line-height:1.8}
+  .studio .en{letter-spacing:.1em}
 
-  footer{padding:40px 0 56px;text-align:center;font-size:11px;color:var(--muted);letter-spacing:.15em;font-family:var(--font-en)}
+  footer{padding:56px 0 48px;text-align:center;font-size:11px;color:var(--muted);letter-spacing:.15em;font-family:var(--font-en)}
 </style>
 </head>
 <body>
 
-<!-- ▼ イベント告知(ここだけ書き換え。告知がない時期は div ごと削除) -->
+<!-- ▼ お知らせバー(1行。イベントが変わったらここと下の NEWS を書き換え) -->
 <div class="notice">
-  【要確認】次回の展示・イベント情報をここに入れます
+  <a href="#news">10/24(土)・25(日) Open Day「Brain Trace」@ Oh Studio Hiroshima</a>
 </div>
-<!-- ▲ イベント告知 -->
+<!-- ▲ お知らせバー -->
 
 <header class="wrap">
   <h1 class="name-en">AMI KAIJIMA</h1>
   <p class="name-ja">海島亜美</p>
-  <nav>
+  <nav aria-label="ページ内メニュー">
+    <a href="#news">NEWS</a>
     <a href="#works">WORKS</a>
     <a href="#profile">PROFILE</a>
+    <a href="#history">HISTORY</a>
+    <a href="#shop">SHOP</a>
     <a href="#contact">CONTACT</a>
   </nav>
 </header>
 
 <main class="wrap">
 
+  <!-- ▼ NEWS(イベント告知) -->
+  <section id="news">
+    <h2>NEWS</h2>
+    <article class="event">
+      <div class="label">OPEN DAY</div>
+      <h3>Brain Trace</h3>
+      <p class="sub">参加型アート</p>
+      <dl class="facts">
+        <dt>日時</dt><dd>10/24(土)19:30〜23:00<br>10/25(日)11:00〜19:00</dd>
+        <dt>場所</dt><dd>Oh Studio Hiroshima 4F<br>広島市中区小町9-13</dd>
+        <dt>所要時間</dt><dd>1人 15分前後</dd>
+        <dt>参加費</dt><dd><span class="tbd">要確認</span></dd>
+        <dt>参加方法</dt><dd>Instagram の DM でご予約ください。飛び入りも大歓迎です</dd>
+      </dl>
+      <ol class="steps">
+        <li>いくつかの軽い質問に、思いつくまま答えます</li>
+        <li>その会話をもとに、海島がその場で絵を描きます</li>
+        <li>描いた絵はお持ち帰りいただき、写しは壁の作品に残ります(後日のお渡し・郵送もできます)</li>
+      </ol>
+      <p class="note">時間は当日の様子で前後することがあります。最新情報は <a href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">Instagram</a> でお知らせします。ふらっと来てください。</p>
+    </article>
+  </section>
+  <!-- ▲ NEWS -->
+
   <section id="works">
     <h2>WORKS</h2>
-    <div class="works">
-      <!-- 作品1件分。写真が届いたら .ph を <img src="images/xxx.jpg" alt="作品名"> に置き換え -->
-      <article class="work">
-        <div class="ph">作品写真 準備中</div>
-        <div class="cap">
-          <div class="t">タイトル <span class="tbd">要確認</span></div>
-          <div class="meta">技法・サイズ・制作年 <span class="tbd">要確認</span></div>
-          <div class="meta">価格 <span class="tbd">要確認</span></div>
-        </div>
-      </article>
-      <article class="work">
-        <div class="ph">作品写真 準備中</div>
-        <div class="cap">
-          <div class="t">タイトル <span class="tbd">要確認</span></div>
-          <div class="meta">技法・サイズ・制作年 <span class="tbd">要確認</span></div>
-          <div class="meta">価格 <span class="tbd">要確認</span></div>
-        </div>
-      </article>
+    <div class="hero-work">
+      <img src="img/wakeup.webp" alt="ピンクと水色の思考迷路で描かれた文字作品「WAKE UP」" width="1600" height="1066" fetchpriority="high">
     </div>
-    <p class="shop-note">作品のご購入・ご相談は、メールまたは Instagram の DM からお気軽にどうぞ。<br>グッズは <a href="https://suzuri.jp/AMIKAIJIMA" target="_blank" rel="noopener">SUZURI</a> でお求めいただけます。</p>
+    <p class="lead-q">思考迷路<br><span class="cap">私はいつも、終わりのない思考の旅を続けている。</span></p>
+
+    <img src="img/maze.webp" alt="赤い絵の具で描かれた、最初の思考迷路" width="1400" height="1161" loading="lazy">
+    <p class="cap">最初の思考迷路</p>
+
+    <ul class="series">
+      <li><span>思考迷路</span><span class="s">原画 / 価格 <span class="tbd">要確認</span></span></li>
+      <li><span>思考迷路メルティ</span><span class="s">原画 / 価格 <span class="tbd">要確認</span></span></li>
+      <li><span>思考迷路MINI</span><span class="s">10cm × 10cm / 価格 <span class="tbd">要確認</span></span></li>
+      <li><span>パネルシリーズ</span><span class="s">原画 / 価格 <span class="tbd">要確認</span></span></li>
+    </ul>
+
+    <div style="margin-top:32px">
+      <img src="img/mini.webp" alt="ハート型の思考迷路を描いた、色とりどりの思考迷路MINI" width="1400" height="1400" loading="lazy">
+      <p class="cap">思考迷路MINI(過去の作品)</p>
+    </div>
+
+    <div class="sub-h">
+      <div class="en">2026.06 / OH STUDIO</div>
+      <h3>個展「CONDITION」</h3>
+    </div>
+    <div class="grid2">
+      <img class="wide" src="img/room.webp" alt="「WAKE UP」「CONDITION」と大きな思考迷路のパネルが並ぶ展示風景" width="1600" height="1066" loading="lazy">
+      <img src="img/goodme.webp" alt="「GO」「OK」「DO」「ME」の4枚のパネル" width="1066" height="1600" loading="lazy">
+      <img src="img/walk.webp" alt="展示室の壁に並ぶ3つのパネル" width="1066" height="1600" loading="lazy">
+      <img class="wide" src="img/hearts.webp" alt="ハート型の思考迷路を描いた青・黄・ピンクのキャンバス作品" width="1600" height="1066" loading="lazy">
+      <img src="img/cond-1.webp" alt="ピンクの思考迷路を切り抜いたパネル" width="900" height="900" loading="lazy">
+      <img src="img/cond-2.webp" alt="「CONDITION」の文字を思考迷路で埋めたパネル" width="900" height="900" loading="lazy">
+    </div>
+    <p class="cap">ほかの作品は Instagram でも見られます。</p>
   </section>
 
   <section id="profile">
     <h2>PROFILE</h2>
     <div class="profile">
-      <div class="photo">写真</div>
-      <!-- 自己紹介文は Ami 本人の文章をそのまま入れる -->
-      <p>【要確認】Ami さんご本人の自己紹介文をここにそのまま入れます。</p>
+      <img class="photo" src="img/photo-main.webp" alt="海島亜美" width="1200" height="1800" loading="lazy">
+      <p class="nm">海島亜美<span class="en">AMI KAIJIMA</span></p>
+      <p class="base">広島県在住</p>
+      <!-- 本人の文章。言い回しは変えない -->
+      <p>アクリル絵の具やクレヨンを使い、「人間の複雑な感情や矛盾、生と死の葛藤」をテーマに制作。</p>
+      <p>思春期に死を強く意識した経験が、私の作品の原点です。</p>
+      <p>言葉にしづらい感情を色や形に託し、見る人が自分自身と向き合えるような作品を目指しています。</p>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>HISTORY</h2>
+    <ul class="history">
+      <li><time>2026.10</time><div>イベント「wonderholic jamborre」<span>広島ゲートパーク</span></div></li>
+      <li><time>2026.07</time><div>合同展示「ART SHODO 33 Selected Artists Exhibition 2026」<span>練馬区美術区民ギャラリー</span></div></li>
+      <li><time>2026.06</time><div>個展「CONDITION」<span>Oh Studio</span></div></li>
+      <li><time>2026.02</time><div>Oh Studio 入居</div></li>
+      <li><time>2025.12</time><div>合同展示「SHODO NEW ERA 2025」<span>三鷹市芸術文化センター</span></div></li>
+      <li><time>2025.11</time><div>ファッションイベント「JAPAN FASHION TOUR」参加<span>広島シャレオ</span></div></li>
+      <li><time>2025.11</time><div>イベント「ART BORN JAM」参加<span>ART BORN HIROSHIMA</span></div></li>
+      <li><time>2025.06</time><div>個展「生き続ける私へ」<span>ART BORN HIROSHIMA</span></div></li>
+      <li><time>2025.03</time><div>グループ展「子宮に邂逅」参加<span>横川ギルド</span></div></li>
+      <li><time>2025.01</time><div>個展「Just trust yourself 展」<span>広島ランデヴー</span></div></li>
+      <li><time>2024.05</time><div>合同展示「ohstudio ATELIER OPEN DAY」参加</div></li>
+      <li><time>2024.03</time><div>個展「私を知る為の解剖展」<span>廃墟ギャラリー</span></div></li>
+    </ul>
+  </section>
+
+  <section id="shop">
+    <h2>SHOP</h2>
+    <div class="cards">
+      <a class="card" href="#contact">
+        <b>原画</b>
+        原画のご購入・ご相談は、メールか Instagram の DM でお気軽にどうぞ。価格表は準備中です。
+        <span class="go">CONTACT</span>
+      </a>
+      <a class="card" href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">
+        <b>展示・イベント会場</b>
+        思考迷路MINI、花瓶、アクリルキーホルダーなどは会場で販売しています。日程は Instagram でお知らせします。
+        <span class="go">INSTAGRAM</span>
+      </a>
+      <a class="card" href="https://suzuri.jp/AMIKAIJIMA" target="_blank" rel="noopener">
+        <b>SUZURI</b>
+        Tシャツ、ステッカー、スマホケースなどのグッズです。
+        <span class="go">SUZURI</span>
+      </a>
     </div>
   </section>
 
   <section id="contact">
     <h2>CONTACT</h2>
     <div class="contact">
-      <p>作品のご相談・ご依頼はこちらへ</p>
+      <p style="margin:0">作品のご相談・ご依頼はこちらへ</p>
       <p class="mail"><a href="mailto:kaijimaami@gmail.com">kaijimaami@gmail.com</a></p>
       <p style="font-size:13px;color:var(--muted)">Instagram の DM でも承っています</p>
       <ul class="links">
         <li><a href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.threads.net/@amikaijima" target="_blank" rel="noopener">Threads</a></li>
         <li><a href="https://www.tiktok.com/@ami_kaijima" target="_blank" rel="noopener">TikTok</a></li>
         <li><a href="https://x.com/AMI_KAIJIMA" target="_blank" rel="noopener">X</a></li>
-        <li><a href="https://www.threads.net/@amikaijima" target="_blank" rel="noopener">Threads</a></li>
         <li><a href="https://suzuri.jp/AMIKAIJIMA" target="_blank" rel="noopener">SUZURI</a></li>
       </ul>
+      <div class="studio">
+        <div class="en">STUDIO</div>
+        Oh Studio Hiroshima<br>
+        広島市中区小町9-13<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E5%B8%82%E4%B8%AD%E5%8C%BA%E5%B0%8F%E7%94%BA9-13" target="_blank" rel="noopener">Google マップで見る</a>
+      </div>
     </div>
   </section>
 
 </main>
 
-<footer>© AMI KAIJIMA</footer>
+<footer>© 2026 AMI KAIJIMA / 海島亜美</footer>
 </body>
 </html>
