@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fbfaf7; --surface:#fff; --text:#1f1f1f; --muted:#6b6b66; --line:#e3e1db; --soft:#efede8; --tbd:#a0522d;
+    --bg:#16090d; --surface:#22101a; --text:#f7e9ee; --muted:#b4949f; --line:#3a1d27; --soft:#22101a; --tbd:#ff8a5c; --pink:#ff5c93; --pink-strong:#ff2e74;
     --font-en:"Optima","Marcellus",serif;
     --font-ja:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
   }
@@ -30,7 +30,7 @@
   .en{font-family:var(--font-en)}
 
   /* お知らせバー(1行) */
-  .notice{border-bottom:1px solid var(--line);font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
+  .notice{background:var(--pink-strong);color:#fff;font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
   .notice a{text-decoration:underline;text-underline-offset:3px}
 
   header{padding:48px 0 0;text-align:center}
@@ -41,7 +41,9 @@
   nav a{text-decoration:none}
 
   section{padding:56px 0 0}
-  h2{font-family:var(--font-en);font-weight:400;font-size:14px;letter-spacing:.3em;margin-bottom:24px;text-align:center}
+  h2{font-family:var(--font-en);font-weight:400;font-size:14px;letter-spacing:.3em;margin-bottom:24px;text-align:center;color:var(--pink)}
+  .event .label,.sub-h .en,.card .go,.studio .en{color:var(--pink)}
+  .sold{display:inline-block;font-family:var(--font-en);font-size:10px;letter-spacing:.15em;border:1px solid var(--pink);color:var(--pink);padding:0 6px;margin-left:6px;line-height:1.7;vertical-align:1px}
   h3{font-weight:500;font-size:17px;line-height:1.6;margin-bottom:12px}
   p{margin-bottom:1em}
   .cap{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.7}
@@ -73,8 +75,9 @@
 
   .price-list{display:grid;grid-template-columns:1fr 1fr;gap:28px 12px;margin-top:24px}
   .price-list .wide{grid-column:1/-1}
-  .price-list img{width:100%;aspect-ratio:1/1;object-fit:cover}
-  .price-list .wide img{aspect-ratio:3/2}
+  .price-list .pic{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:6%}
+  .price-list .wide .pic{aspect-ratio:2/1;padding:0 2%}
+  .price-list .pic img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
   .price-list .meta{margin-top:8px;font-size:12px;line-height:1.7;color:var(--muted)}
   .price-list .t{display:block;color:var(--text);font-size:14px}
   .price-list .pr{display:block;color:var(--text);font-size:14px;margin-top:4px}
@@ -190,23 +193,35 @@
     <!-- ▼ 価格表(本人提供の CONDITION 価格表より) -->
     <div class="price-list">
       <article class="item wide">
-        <img src="img/wakeup.webp" alt="WAKE UP" width="1600" height="1066" loading="lazy">
+        <div class="pic"><img src="img/cut/wakeup.webp" alt="WAKE UP" width="857" height="425" loading="lazy"></div>
         <div class="meta"><span class="t en">WAKE UP</span>900 × 1800mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥110,000(税込)</span></div>
       </article>
       <article class="item">
-        <img src="img/cond-1.webp" alt="思考迷路 -CORE-" width="900" height="900" loading="lazy">
+        <div class="pic"><img src="img/cut/core.webp" alt="思考迷路 -CORE-" width="380" height="378" loading="lazy"></div>
         <div class="meta"><span class="t">思考迷路 -CORE-</span>900 × 900mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥77,000(税込)</span></div>
       </article>
       <article class="item">
-        <img src="img/cond-2.webp" alt="CONDITION" width="900" height="900" loading="lazy">
+        <div class="pic"><img src="img/cut/condition.webp" alt="CONDITION" width="402" height="395" loading="lazy"></div>
         <div class="meta"><span class="t en">CONDITION</span>900 × 900mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥77,000(税込)</span></div>
       </article>
-      <article class="item wide">
-        <img src="img/goodme.webp" alt="GO・DO・OK・ME の4枚のパネル" width="1066" height="1600" loading="lazy" style="aspect-ratio:4/3;object-fit:cover">
-        <div class="meta"><span class="t en">GO, DO, OK, ME</span>450 × 450mm(各)<br>Wood Panel, Acrylic, Spray Paint<span class="pr">各 ¥33,000(税込)</span></div>
+      <article class="item">
+        <div class="pic"><img src="img/cut/go.webp" alt="GO" width="309" height="306" loading="lazy"></div>
+        <div class="meta"><span class="t en">GO<span class="sold">SOLD</span></span>450 × 450mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥33,000(税込)</span></div>
+      </article>
+      <article class="item">
+        <div class="pic"><img src="img/cut/do.webp" alt="DO" width="317" height="312" loading="lazy"></div>
+        <div class="meta"><span class="t en">DO</span>450 × 450mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥33,000(税込)</span></div>
+      </article>
+      <article class="item">
+        <div class="pic"><img src="img/cut/ok.webp" alt="OK" width="309" height="300" loading="lazy"></div>
+        <div class="meta"><span class="t en">OK</span>450 × 450mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥33,000(税込)</span></div>
+      </article>
+      <article class="item">
+        <div class="pic"><img src="img/cut/me.webp" alt="ME" width="318" height="318" loading="lazy"></div>
+        <div class="meta"><span class="t en">ME<span class="sold">SOLD</span></span>450 × 450mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥33,000(税込)</span></div>
       </article>
     </div>
-    <p class="cap">ご購入・ご相談は <a href="#contact">メールか Instagram の DM</a> へどうぞ。在庫状況 <span class="tbd">要確認</span></p>
+    <p class="cap">ご購入・ご相談は <a href="#contact">メールか Instagram の DM</a> へどうぞ。</p>
     <!-- ▲ 価格表 -->
 
     <div class="grid2" style="margin-top:32px">
