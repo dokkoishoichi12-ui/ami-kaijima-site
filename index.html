@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fbfaf7; --text:#1f1f1f; --muted:#6b6b66; --line:#e3e1db; --soft:#efede8; --tbd:#a0522d;
+    --bg:#fbfaf7; --surface:#fff; --text:#1f1f1f; --muted:#6b6b66; --line:#e3e1db; --soft:#efede8; --tbd:#a0522d;
     --font-en:"Optima","Marcellus",serif;
     --font-ja:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
   }
@@ -47,7 +47,7 @@
   .cap{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.7}
 
   /* NEWS */
-  .event{border:1px solid var(--line);background:#fff;padding:24px 20px}
+  .event{border:1px solid var(--line);background:var(--surface);padding:24px 20px}
   .event .label{font-family:var(--font-en);font-size:11px;letter-spacing:.25em;color:var(--muted)}
   .event h3{font-family:var(--font-en);font-size:26px;font-weight:400;letter-spacing:.08em;margin:4px 0 2px}
   .event .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
@@ -71,6 +71,14 @@
   .sub-h{margin-top:48px;text-align:center}
   .sub-h .en{font-size:11px;letter-spacing:.25em;color:var(--muted)}
 
+  .price-list{display:grid;grid-template-columns:1fr 1fr;gap:28px 12px;margin-top:24px}
+  .price-list .wide{grid-column:1/-1}
+  .price-list img{width:100%;aspect-ratio:1/1;object-fit:cover}
+  .price-list .wide img{aspect-ratio:3/2}
+  .price-list .meta{margin-top:8px;font-size:12px;line-height:1.7;color:var(--muted)}
+  .price-list .t{display:block;color:var(--text);font-size:14px}
+  .price-list .pr{display:block;color:var(--text);font-size:14px;margin-top:4px}
+
   /* PROFILE */
   .profile{display:flex;flex-direction:column;align-items:center;text-align:center}
   .profile .photo{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:50% 25%;margin-bottom:16px}
@@ -89,7 +97,7 @@
   /* SHOP */
   .cards{display:grid;gap:12px}
   @media(min-width:640px){.cards{grid-template-columns:repeat(3,1fr)}}
-  .card{border:1px solid var(--line);background:#fff;padding:18px;text-decoration:none;display:block;font-size:13px;line-height:1.8}
+  .card{border:1px solid var(--line);background:var(--surface);padding:18px;text-decoration:none;display:block;font-size:13px;line-height:1.8}
   .card b{display:block;font-weight:500;font-size:15px;margin-bottom:4px}
   .card .go{display:block;margin-top:8px;font-family:var(--font-en);font-size:11px;letter-spacing:.2em;color:var(--muted)}
 
@@ -138,7 +146,7 @@
         <dt>日時</dt><dd>10/24(土)19:30〜23:00<br>10/25(日)11:00〜19:00</dd>
         <dt>場所</dt><dd>Oh Studio Hiroshima 4F<br>広島市中区小町9-13</dd>
         <dt>所要時間</dt><dd>1人 15分前後</dd>
-        <dt>参加費</dt><dd><span class="tbd">要確認</span></dd>
+        <dt>参加費</dt><dd>500円</dd>
         <dt>参加方法</dt><dd>Instagram の DM でご予約ください。飛び入りも大歓迎です</dd>
       </dl>
       <ol class="steps">
@@ -156,7 +164,7 @@
     <div class="hero-work">
       <img src="img/wakeup.webp" alt="ピンクと水色の思考迷路で描かれた文字作品「WAKE UP」" width="1600" height="1066" fetchpriority="high">
     </div>
-    <p class="lead-q">思考迷路<br><span class="cap">私はいつも、終わりのない思考の旅を続けている。</span></p>
+    <p class="lead-q">思考迷路</p>
 
     <img src="img/maze.webp" alt="赤い絵の具で描かれた、最初の思考迷路" width="1400" height="1161" loading="lazy">
     <p class="cap">最初の思考迷路</p>
@@ -177,13 +185,33 @@
       <div class="en">2026.06 / OH STUDIO</div>
       <h3>個展「CONDITION」</h3>
     </div>
-    <div class="grid2">
-      <img class="wide" src="img/room.webp" alt="「WAKE UP」「CONDITION」と大きな思考迷路のパネルが並ぶ展示風景" width="1600" height="1066" loading="lazy">
-      <img src="img/goodme.webp" alt="「GO」「OK」「DO」「ME」の4枚のパネル" width="1066" height="1600" loading="lazy">
-      <img src="img/walk.webp" alt="展示室の壁に並ぶ3つのパネル" width="1066" height="1600" loading="lazy">
-      <img class="wide" src="img/hearts.webp" alt="ハート型の思考迷路を描いた青・黄・ピンクのキャンバス作品" width="1600" height="1066" loading="lazy">
-      <img src="img/cond-1.webp" alt="ピンクの思考迷路を切り抜いたパネル" width="900" height="900" loading="lazy">
-      <img src="img/cond-2.webp" alt="「CONDITION」の文字を思考迷路で埋めたパネル" width="900" height="900" loading="lazy">
+    <img src="img/room.webp" alt="「WAKE UP」「CONDITION」と大きな思考迷路のパネルが並ぶ展示風景" width="1600" height="1066" loading="lazy">
+
+    <!-- ▼ 価格表(本人提供の CONDITION 価格表より) -->
+    <div class="price-list">
+      <article class="item wide">
+        <img src="img/wakeup.webp" alt="WAKE UP" width="1600" height="1066" loading="lazy">
+        <div class="meta"><span class="t en">WAKE UP</span>900 × 1800mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥110,000(税込)</span></div>
+      </article>
+      <article class="item">
+        <img src="img/cond-1.webp" alt="思考迷路 -CORE-" width="900" height="900" loading="lazy">
+        <div class="meta"><span class="t">思考迷路 -CORE-</span>900 × 900mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥77,000(税込)</span></div>
+      </article>
+      <article class="item">
+        <img src="img/cond-2.webp" alt="CONDITION" width="900" height="900" loading="lazy">
+        <div class="meta"><span class="t en">CONDITION</span>900 × 900mm<br>Wood Panel, Acrylic, Spray Paint<span class="pr">¥77,000(税込)</span></div>
+      </article>
+      <article class="item wide">
+        <img src="img/goodme.webp" alt="GO・DO・OK・ME の4枚のパネル" width="1066" height="1600" loading="lazy" style="aspect-ratio:4/3;object-fit:cover">
+        <div class="meta"><span class="t en">GO, DO, OK, ME</span>450 × 450mm(各)<br>Wood Panel, Acrylic, Spray Paint<span class="pr">各 ¥33,000(税込)</span></div>
+      </article>
+    </div>
+    <p class="cap">ご購入・ご相談は <a href="#contact">メールか Instagram の DM</a> へどうぞ。在庫状況 <span class="tbd">要確認</span></p>
+    <!-- ▲ 価格表 -->
+
+    <div class="grid2" style="margin-top:32px">
+      <img src="img/walk.webp" alt="展示室の壁に並ぶパネル" width="1066" height="1600" loading="lazy">
+      <img src="img/hearts.webp" alt="ハート型の思考迷路を描いた青・黄・ピンクのキャンバス作品" width="1600" height="1066" loading="lazy" style="aspect-ratio:2/3">
     </div>
     <p class="cap">ほかの作品は Instagram でも見られます。</p>
   </section>
