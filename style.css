@@ -1,0 +1,108 @@
+:root{
+  --bg:#16090d; --surface:#22101a; --text:#f7e9ee; --muted:#b4949f; --line:#3a1d27; --soft:#22101a; --tbd:#ff8a5c; --pink:#ff5c93; --pink-strong:#ff2e74;
+  --font-en:"Optima","Marcellus",serif;
+  --font-ja:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-en),var(--font-ja);
+  font-size:15px;line-height:1.9;letter-spacing:.03em;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.tbd{color:var(--tbd);font-size:12px;white-space:nowrap}
+.en{font-family:var(--font-en)}
+
+/* お知らせバー(1行) */
+.notice{background:var(--pink-strong);color:#fff;font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
+.notice a{text-decoration:underline;text-underline-offset:3px}
+
+header{padding:48px 0 0;text-align:center}
+.name-en{font-family:var(--font-en);font-size:clamp(26px,7vw,40px);letter-spacing:.25em;font-weight:400}
+.name-ja{font-family:var(--font-ja);font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3em}
+nav{margin:24px 0 0;padding:12px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 22px;
+  font-family:var(--font-en);font-size:12px;letter-spacing:.2em;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+nav a{text-decoration:none}
+
+section{padding:56px 0 0}
+h2{font-family:var(--font-en);font-weight:400;font-size:14px;letter-spacing:.3em;margin-bottom:24px;text-align:center;color:var(--pink)}
+.event .label,.sub-h .en,.card .go,.studio .en{color:var(--pink)}
+.sold{display:inline-block;font-family:var(--font-en);font-size:10px;letter-spacing:.15em;border:1px solid var(--pink);color:var(--pink);padding:0 6px;margin-left:6px;line-height:1.7;vertical-align:1px}
+h3{font-weight:500;font-size:17px;line-height:1.6;margin-bottom:12px}
+p{margin-bottom:1em}
+.cap{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.7}
+
+/* NEWS */
+.event{border:1px solid var(--line);background:var(--surface);padding:24px 20px}
+.event .label{font-family:var(--font-en);font-size:11px;letter-spacing:.25em;color:var(--muted)}
+.event h3{font-family:var(--font-en);font-size:26px;font-weight:400;letter-spacing:.08em;margin:4px 0 2px}
+.event .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.facts{display:grid;grid-template-columns:5em 1fr;gap:6px 12px;font-size:14px;margin-bottom:18px}
+.facts dt{color:var(--muted)}
+.facts dd{min-width:0}
+.steps{padding-left:1.4em;font-size:14px;margin-bottom:16px}
+.steps li{margin-bottom:4px}
+.note{font-size:12px;color:var(--muted);margin:0}
+
+/* WORKS */
+.hero-work{margin:0 -16px}
+@media(min-width:640px){.hero-work{margin:0}}
+.lead-q{text-align:center;font-family:var(--font-ja);font-size:15px;margin:28px auto 32px;max-width:24em}
+.series{list-style:none;border-top:1px solid var(--line);margin:28px 0 0}
+.series li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.series .s{color:var(--muted);font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.grid2 .wide{grid-column:1/-1}
+.grid2 img{width:100%;height:100%;object-fit:cover}
+.sub-h{margin-top:48px;text-align:center}
+.sub-h .en{font-size:11px;letter-spacing:.25em;color:var(--muted)}
+
+.price-list{display:grid;grid-template-columns:1fr 1fr;gap:28px 12px;margin-top:24px}
+.price-list .wide{grid-column:1/-1}
+.price-list .pic{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:6%}
+.price-list .wide .pic{aspect-ratio:2/1;padding:0 2%}
+.price-list .pic img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.price-list .meta{margin-top:8px;font-size:12px;line-height:1.7;color:var(--muted)}
+.price-list .t{display:block;color:var(--text);font-size:14px}
+.price-list .pr{display:block;color:var(--text);font-size:14px;margin-top:4px}
+
+/* PROFILE */
+.profile{display:flex;flex-direction:column;align-items:center;text-align:center}
+.profile .photo{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:50% 25%;margin-bottom:16px}
+.profile .nm{font-size:15px;margin-bottom:2px}
+.profile .nm .en{font-size:12px;letter-spacing:.15em;color:var(--muted);margin-left:.6em}
+.profile .base{font-size:13px;color:var(--muted);margin-bottom:18px}
+.profile p{font-family:var(--font-ja);font-size:14px;max-width:30em}
+
+/* HISTORY */
+.history{list-style:none;border-top:1px solid var(--line)}
+.history li{display:grid;grid-template-columns:4.8em 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.7}
+.history time{font-family:var(--font-en);color:var(--muted);font-variant-numeric:tabular-nums}
+.history li>div{min-width:0;overflow-wrap:anywhere}
+.history span{display:block;color:var(--muted);font-size:12px}
+
+/* SHOP */
+.cards{display:grid;gap:12px}
+@media(min-width:640px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{border:1px solid var(--line);background:var(--surface);padding:18px;text-decoration:none;display:block;font-size:13px;line-height:1.8}
+.card b{display:block;font-weight:500;font-size:15px;margin-bottom:4px}
+.card .go{display:block;margin-top:8px;font-family:var(--font-en);font-size:11px;letter-spacing:.2em;color:var(--muted)}
+
+/* CONTACT */
+.contact{text-align:center;font-size:14px}
+.contact .mail{font-family:var(--font-en);font-size:17px;letter-spacing:.04em;word-break:break-all;margin:4px 0}
+.links{list-style:none;margin-top:24px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;font-family:var(--font-en);font-size:13px;letter-spacing:.1em}
+.links a{text-decoration:none;border-bottom:1px solid var(--line)}
+.studio{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;line-height:1.8}
+.studio .en{letter-spacing:.1em}
+
+footer{padding:56px 0 48px;text-align:center;font-size:11px;color:var(--muted);letter-spacing:.15em;font-family:var(--font-en)}
+
+/* SHOP ページ */
+.btn{display:inline-block;margin-top:10px;padding:9px 18px;font-size:13px;letter-spacing:.08em;text-decoration:none;border:1px solid var(--pink);color:var(--pink)}
+.btn.buy{background:var(--pink-strong);border-color:var(--pink-strong);color:#fff}
+.btn.off{border-color:var(--line);color:var(--muted)}
+.center{text-align:center}
+.info{border-top:1px solid var(--line)}
+.info dt{padding-top:14px;font-size:13px;color:var(--pink)}
+.info dd{padding:2px 0 14px;font-size:14px;border-bottom:1px solid var(--line)}
