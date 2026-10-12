@@ -109,3 +109,8 @@ footer{padding:56px 0 48px;text-align:center;font-size:11px;color:var(--muted);l
 .info{border-top:1px solid var(--line)}
 .info dt{padding-top:14px;font-size:13px;color:var(--pink)}
 .info dd{padding:2px 0 14px;font-size:14px;border-bottom:1px solid var(--line)}
+.sizes{width:100%;max-width:420px;margin:0 auto;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.sizes th{font-weight:400;font-size:12px;color:var(--muted);text-align:left;padding:8px 0;border-bottom:1px solid var(--line)}
+.sizes th:last-child,.sizes td:last-child{text-align:right}
+.sizes td{padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.sizes .sub{display:block;font-size:11px;color:var(--muted)}
