@@ -74,7 +74,6 @@
             <button class="btn" id="toAround" type="button">選んだ色をまわりに</button>
           </div>
           <p class="now">ハートとまわりを、それぞれ一度に塗れます。細かい部分は迷路をタップして塗り分けてください。</p>
-          <label class="now" style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="heart" checked> 真ん中にハートを入れる</label>
         </div>
         <div>
           <div class="label">TOOLS</div>
@@ -178,55 +177,40 @@
 
   // テンプレートを読み込み、白い部分を区画ごとに番号付けする
   const img = new Image();
-  let baseGray, inside, heartOn = true;
-  img.onload = () => {
+  let baseGray, inside;
+  // ハートになる区画の目印(本人が塗った見本から作成)
+  const heartImg = new Image();
+  let loaded = 0;
+  const ready = () => { if (++loaded < 2) return;
     ctx.drawImage(img, 0, 0, W, H);
     const src = ctx.getImageData(0, 0, W, H).data;
     baseGray = new Uint8Array(W * H);
     for (let i = 0; i < W * H; i++) baseGray[i] = src[i * 4];
+    ctx.drawImage(heartImg, 0, 0, W, H);
+    const hm = ctx.getImageData(0, 0, W, H).data;
+    inside = new Uint8Array(W * H);
+    for (let i = 0; i < W * H; i++) inside[i] = hm[i * 4] > 128 ? 1 : 0;
     out = ctx.createImageData(W, H);
     setup();
   };
-
-  // ハートの形(真ん中に大きく)
-  function heartPath(c) {
-    const cx = W / 2, top = H * 0.30, s = W * 0.0062;
-    c.beginPath();
-    c.moveTo(cx, top);
-    c.bezierCurveTo(cx - 10 * s, top - 22 * s, cx - 52 * s, top - 18 * s, cx - 52 * s, top + 16 * s);
-    c.bezierCurveTo(cx - 52 * s, top + 46 * s, cx - 22 * s, top + 70 * s, cx, top + 92 * s);
-    c.bezierCurveTo(cx + 22 * s, top + 70 * s, cx + 52 * s, top + 46 * s, cx + 52 * s, top + 16 * s);
-    c.bezierCurveTo(cx + 52 * s, top - 18 * s, cx + 10 * s, top - 22 * s, cx, top);
-    c.closePath();
-  }
+  img.onload = ready; heartImg.onload = ready;
+  heartImg.src = 'img/mini-heart.png';
 
   function setup() {
-    gray = baseGray.slice();
-    inside = new Uint8Array(W * H);
-    if (heartOn) {
-      const oc = document.createElement('canvas'); oc.width = W; oc.height = H;
-      const o = oc.getContext('2d');
-      heartPath(o); o.fillStyle = '#f00'; o.fill();
-      o.lineWidth = 16; o.strokeStyle = '#00f'; o.stroke();
-      const d = o.getImageData(0, 0, W, H).data;
-      for (let i = 0; i < W * H; i++) {
-        if (d[i * 4] > 128) inside[i] = 1;
-        const line = d[i * 4 + 2]; // ハートのふち線
-        if (line) gray[i] = Math.min(gray[i], 255 - line);
-      }
-    }
+    gray = baseGray;
     labels = new Int32Array(W * H).fill(-1); nLabels = 0;
-    const stack = new Int32Array(W * H), labIn = [];
+    const stack = new Int32Array(W * H), labIn = [], cntIn = [], cnt = [];
     for (let s = 0; s < W * H; s++) {
       if (gray[s] < 128 || labels[s] !== -1) continue;
-      const id = nLabels++; labIn[id] = inside[s]; let top = 0; stack[top++] = s; labels[s] = id;
+      const id = nLabels++; cnt[id] = 0; cntIn[id] = 0; let top = 0; stack[top++] = s; labels[s] = id;
       while (top) {
         const p = stack[--top], x = p % W, y = (p / W) | 0;
+        cnt[id]++; cntIn[id] += inside[p];
         const nb = [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, y > 0 ? p - W : -1, y < H - 1 ? p + W : -1];
         for (const q of nb) if (q >= 0 && labels[q] === -1 && gray[q] >= 128) { labels[q] = id; stack[top++] = q; }
       }
     }
-    regionIn = labIn;
+    regionIn = cnt.map((n, l) => (cntIn[l] * 2 > n ? 1 : 0));
     // 線のふち(グレーの部分)にも隣の区画の色が回るよう、番号を少し広げておく
     paint = labels.slice();
     for (let pass = 0; pass < 4; pass++) {
@@ -298,19 +282,13 @@
     if (h[0] === 'all') fills = h[1]; else fills[h[0]] = h[1];
     render();
   };
-  document.getElementById('toHeart').onclick = () => { if (heartOn) paintGroup(1); };
-  document.getElementById('toAround').onclick = () => paintGroup(heartOn ? 0 : 0);
-  document.getElementById('heart').onchange = e => {
-    heartOn = e.target.checked;
-    document.getElementById('toHeart').disabled = !heartOn;
-    setup();
-  };
+  document.getElementById('toHeart').onclick = () => paintGroup(1);
+  document.getElementById('toAround').onclick = () => paintGroup(0);
   document.getElementById('reset').onclick = () => { history = []; fills.fill('#ffffff'); render(); };
   document.getElementById('random').onclick = () => {
     const picks = COLORS.filter(c => !c[2]).sort(() => Math.random() - .5).slice(0, 3 + (Math.random() * 3 | 0)).map(c => c[1]);
     history = [];
-    if (heartOn) { const [a, b] = picks; fills = fills.map((f, l) => (regionIn[l] ? a : b)); }
-    else fills = fills.map(() => picks[Math.random() * picks.length | 0]);
+    const [a, b] = picks; fills = fills.map((f, l) => (regionIn[l] ? a : b));
     render();
   };
   document.getElementById('save').onclick = () => {
