@@ -32,6 +32,9 @@
   .steps-o li{margin-bottom:6px}
   .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
   @media(min-width:640px){.mini-grid{grid-template-columns:repeat(5,1fr)}}
+  .tpl{margin:24px 0;padding:16px;border:1px solid var(--line);background:var(--surface)}
+  .tpl pre{white-space:pre-wrap;font-family:var(--font-ja);font-size:13px;line-height:1.8;margin:0 0 12px;color:var(--text)}
+  .row a.btn{margin-top:0}
   .hint{font-size:12px;color:var(--muted);margin:8px 0 0;text-align:center}
 </style>
 </head>
@@ -45,8 +48,8 @@
   <nav aria-label="メニュー">
     <a href="index.html">HOME</a>
     <a href="shop.html">SHOP</a>
-    <a href="#gallery">GALLERY</a>
     <a href="#order">ORDER</a>
+    <a href="#gallery">GALLERY</a>
   </nav>
 </header>
 
@@ -95,6 +98,41 @@
     </div>
   </section>
 
+  <section id="order">
+    <h2>HOW TO ORDER</h2>
+    <ol class="steps-o">
+      <li>上のプレビューで色を決めます</li>
+      <li>「この配色で注文する」を押して、配色の画像をメールか Instagram の DM で送ってください。<br>うまく送れないときは、「画像だけ保存」してから、下のテンプレートをコピーして送ってください</li>
+      <li>内容を確認して、海島からお返事します。そのときに Square のお支払いリンクをお送りします</li>
+      <li>お支払いを確認してから制作を始めて、完成したらお渡しします</li>
+    </ol>
+
+    <div class="tpl">
+      <div class="label">TEMPLATE</div>
+      <pre id="tpl"></pre>
+      <div class="row">
+        <button class="btn" id="copy" type="button">テンプレートをコピー</button>
+        <a class="btn" id="dm" href="https://ig.me/m/amikaijima" target="_blank" rel="noopener">Instagram DM を開く</a>
+        <a class="btn" id="mail" href="mailto:kaijimaami@gmail.com">メールを開く</a>
+      </div>
+      <p class="now" id="copyNote">配色を変えると、テンプレートの色の名前も自動で変わります。</p>
+    </div>
+
+    <dl class="info">
+      <dt>価格</dt>
+      <dd>¥11,000(税込)</dd>
+      <dt>特別版</dt>
+      <dd>¥16,500(税込)。ゴールドやシルバーを使うもの、真ん中をハートではなく文字にするものは特別版になります。文字のご希望は、ご注文のときにお知らせください。</dd>
+      <dt>完成まで</dt>
+      <dd>ご注文から1ヶ月以内にお作りします。</dd>
+      <dt>お支払い</dt>
+      <dd>内容を確認したあと、Square のお支払いリンクをお送りします。</dd>
+      <dt>お渡し</dt>
+      <dd>広島市内でしたら、手渡しも可能です。アトリエ(Oh Studio Hiroshima)での受け取りもできます。</dd>
+    </dl>
+    <p class="center" style="margin-top:28px"><a class="btn" href="shop.html">SHOP へ戻る</a></p>
+  </section>
+
   <section id="gallery">
     <h2>GALLERY</h2>
     <p class="center" style="font-size:13px;color:var(--muted)">これまでの思考迷路MINI。配色の参考にどうぞ。</p>
@@ -111,34 +149,6 @@
       <img src="img/mini/mini-10.webp" alt="思考迷路MINI(過去の作品)" width="640" height="640" loading="lazy">
     </div>
     <img src="img/mini/mini-table.webp" alt="テーブルに並んだ思考迷路MINI" width="1200" height="801" loading="lazy" style="margin-top:8px">
-  </section>
-
-  <section id="order">
-    <h2>ORDER</h2>
-    <ol class="steps-o">
-      <li>このページで色を決めて、「この配色で注文する」を押します</li>
-      <li>配色の画像を、メールか Instagram の DM で送ってください(お名前とお受け取り方法も添えてください)</li>
-      <li>内容を確認して、海島からお返事します</li>
-    </ol>
-    <dl class="info">
-      <dt>価格</dt>
-      <dd>¥11,000(税込)</dd>
-      <dt>特別版</dt>
-      <dd>¥16,500(税込)。ゴールドやシルバーを使うもの、真ん中をハートではなく文字にするものは特別版になります。文字のご希望は、ご注文のときにお知らせください。</dd>
-      <dt>完成まで</dt>
-      <dd>ご注文から1ヶ月以内にお作りします。</dd>
-      <dt>お支払い</dt>
-      <dd>内容を確認したあと、Square のお支払いリンクをお送りします。</dd>
-      <dt>お渡し</dt>
-      <dd>広島市内でしたら、手渡しも可能です。アトリエ(Oh Studio Hiroshima)での受け取りもできます。</dd>
-    </dl>
-    <div class="contact" style="margin-top:28px">
-      <p class="mail"><a href="mailto:kaijimaami@gmail.com">kaijimaami@gmail.com</a></p>
-      <ul class="links" style="margin-top:12px">
-        <li><a href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">Instagram DM</a></li>
-      </ul>
-      <p style="margin-top:28px"><a class="btn" href="shop.html">SHOP へ戻る</a></p>
-    </div>
   </section>
 </main>
 
@@ -255,6 +265,7 @@
       d[i * 4 + 3] = 255;
     }
     ctx.putImageData(out, 0, 0);
+    updateTemplate();
     const special = fills.some(f => METAL.has(f));
     price.textContent = special ? '10 × 10 × 3.7cm / 特別版 ¥16,500(税込)' : '10 × 10 × 3.7cm / ¥11,000(税込)';
   }
@@ -309,8 +320,20 @@
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   }
+  const orderText = () => '思考迷路MINI のオーダーです。\n\n' + summary() + '\n\nお名前:\nお受け取り方法(手渡し・アトリエ受け取り・郵送):\n';
+  function updateTemplate() {
+    if (!regionIn.length) return;
+    const t = orderText();
+    document.getElementById('tpl').textContent = t;
+    document.getElementById('mail').href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent('思考迷路MINI オーダー') + '&body=' + encodeURIComponent(t + '\n(配色の画像を添付してください)');
+  }
+  document.getElementById('copy').onclick = async () => {
+    const note = document.getElementById('copyNote');
+    try { await navigator.clipboard.writeText(orderText()); note.textContent = 'コピーしました。DM かメールに貼り付けてください。'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById('tpl')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); note.textContent = '文章を選択しました。長押しでコピーしてください。'; }
+  };
   document.getElementById('send').onclick = async () => {
-    const text = '思考迷路MINI のオーダーです。\n\n' + summary() + '\n\nお名前:\nお受け取り方法(手渡し・アトリエ受け取り・郵送):\n';
+    const text = orderText();
     const b = await toBlob();
     const file = new File([b], 'shikou-meiro-mini.png', { type: 'image/png' });
     // iPhone などでは共有メニューから、画像つきでメールや Instagram に送れる
