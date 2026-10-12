@@ -8,6 +8,9 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font-en),var(--font-ja);
   font-size:15px;line-height:1.9;letter-spacing:.03em;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
+/* 背景:代表作の赤い思考迷路をうっすら重ねる */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(22,9,13,.55),rgba(22,9,13,.85)),url(img/maze.webp) center/cover no-repeat;opacity:.55;pointer-events:none}
+.logo{width:132px;margin:0 auto 14px}
 a{color:inherit}
 .wrap{max-width:960px;margin:0 auto;padding:0 16px}
 .tbd{color:var(--tbd);font-size:12px;white-space:nowrap}
@@ -17,7 +20,7 @@ a{color:inherit}
 .notice{background:var(--pink-strong);color:#fff;font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
 .notice a{text-decoration:underline;text-underline-offset:3px}
 
-header{padding:48px 0 0;text-align:center}
+header{padding:36px 0 0;text-align:center}
 .name-en{font-family:var(--font-en);font-size:clamp(26px,7vw,40px);letter-spacing:.25em;font-weight:400}
 .name-ja{font-family:var(--font-ja);font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3em}
 nav{margin:24px 0 0;padding:12px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 22px;
