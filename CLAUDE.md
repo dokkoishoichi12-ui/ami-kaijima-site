@@ -25,6 +25,10 @@
 - 決定(2026-10-11):当面は無料フォント(英字 Marcellus / 日本語 Zen Kaku Gothic New)。Apple端末では英字に端末内の Optima が出る
 - スマホ表示を最優先(横スクロールなし)
 
+## 公開・検索
+- 本番:https://dokkoishoichi12-ui.github.io/ami-kaijima-site/ (GitHub Pages、main ブランチから公開)
+- Google Search Console 登録済み・sitemap.xml 送信済み(2026-10-12)。index.html の google-site-verification タグは消さない。ページを増やしたら sitemap.xml にも足す
+
 ## リンク・連絡先
 - 連絡先:kaijimaami@gmail.com(作品相談・依頼はメールまたは Instagram DM)
 - Instagram @amikaijima(中心)
