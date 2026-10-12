@@ -20,7 +20,8 @@ a{color:inherit}
 .notice{background:var(--pink-strong);color:#fff;font-size:13px;text-align:center;padding:10px 16px;line-height:1.7}
 .notice a{text-decoration:underline;text-underline-offset:3px}
 
-header{padding:36px 0 0;text-align:center}
+header{text-align:center}
+header.wrap{padding-top:40px}
 .name-en{font-family:var(--font-en);font-size:clamp(26px,7vw,40px);letter-spacing:.25em;font-weight:400}
 .name-ja{font-family:var(--font-ja);font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3em}
 nav{margin:24px 0 0;padding:12px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 22px;
