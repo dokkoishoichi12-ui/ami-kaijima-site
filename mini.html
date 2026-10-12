@@ -53,7 +53,7 @@
 <main class="wrap">
   <section id="simulator">
     <h2>思考迷路MINI ORDER</h2>
-    <p class="center" style="font-size:13px;color:var(--muted)">好きな色を選んで、迷路をタップすると色が入ります。<br>あなただけの思考迷路MINIを、受注制作でお作りします。</p>
+    <p class="center" style="font-size:13px;color:var(--muted)">好きな色を選んで、ハートとまわりに色を入れてみてください。<br>迷路をタップすると、1区画ずつ塗り分けもできます。<br>あなただけの思考迷路MINIを、受注制作でお作りします。</p>
 
     <div class="sim">
       <div>
@@ -66,6 +66,15 @@
           <div class="label">COLOR</div>
           <div class="swatches" id="swatches"></div>
           <p class="now" id="now"></p>
+        </div>
+        <div>
+          <div class="label">2 COLORS</div>
+          <div class="row">
+            <button class="btn" id="toHeart" type="button">選んだ色をハートに</button>
+            <button class="btn" id="toAround" type="button">選んだ色をまわりに</button>
+          </div>
+          <p class="now">ハートとまわりを、それぞれ一度に塗れます。細かい部分は迷路をタップして塗り分けてください。</p>
+          <label class="now" style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="heart" checked> 真ん中にハートを入れる</label>
         </div>
         <div>
           <div class="label">TOOLS</div>
@@ -147,7 +156,7 @@
   const METAL = new Set(COLORS.filter(c => c[2]).map(c => c[1]));
   const cv = document.getElementById('cv'), ctx = cv.getContext('2d'), price = document.getElementById('price');
   const W = cv.width, H = cv.height;
-  let labels, paint, nLabels = 0, fills = [], gray, out, history = [];
+  let labels, paint, regionIn = [], nLabels = 0, fills = [], gray, out, history = [];
   let current = COLORS[0][1];
 
   // 色ボタン
@@ -169,22 +178,55 @@
 
   // テンプレートを読み込み、白い部分を区画ごとに番号付けする
   const img = new Image();
+  let baseGray, inside, heartOn = true;
   img.onload = () => {
     ctx.drawImage(img, 0, 0, W, H);
     const src = ctx.getImageData(0, 0, W, H).data;
-    gray = new Uint8Array(W * H);
-    for (let i = 0; i < W * H; i++) gray[i] = src[i * 4];
-    labels = new Int32Array(W * H).fill(-1);
-    const stack = new Int32Array(W * H);
+    baseGray = new Uint8Array(W * H);
+    for (let i = 0; i < W * H; i++) baseGray[i] = src[i * 4];
+    out = ctx.createImageData(W, H);
+    setup();
+  };
+
+  // ハートの形(真ん中に大きく)
+  function heartPath(c) {
+    const cx = W / 2, top = H * 0.30, s = W * 0.0062;
+    c.beginPath();
+    c.moveTo(cx, top);
+    c.bezierCurveTo(cx - 10 * s, top - 22 * s, cx - 52 * s, top - 18 * s, cx - 52 * s, top + 16 * s);
+    c.bezierCurveTo(cx - 52 * s, top + 46 * s, cx - 22 * s, top + 70 * s, cx, top + 92 * s);
+    c.bezierCurveTo(cx + 22 * s, top + 70 * s, cx + 52 * s, top + 46 * s, cx + 52 * s, top + 16 * s);
+    c.bezierCurveTo(cx + 52 * s, top - 18 * s, cx + 10 * s, top - 22 * s, cx, top);
+    c.closePath();
+  }
+
+  function setup() {
+    gray = baseGray.slice();
+    inside = new Uint8Array(W * H);
+    if (heartOn) {
+      const oc = document.createElement('canvas'); oc.width = W; oc.height = H;
+      const o = oc.getContext('2d');
+      heartPath(o); o.fillStyle = '#f00'; o.fill();
+      o.lineWidth = 16; o.strokeStyle = '#00f'; o.stroke();
+      const d = o.getImageData(0, 0, W, H).data;
+      for (let i = 0; i < W * H; i++) {
+        if (d[i * 4] > 128) inside[i] = 1;
+        const line = d[i * 4 + 2]; // ハートのふち線
+        if (line) gray[i] = Math.min(gray[i], 255 - line);
+      }
+    }
+    labels = new Int32Array(W * H).fill(-1); nLabels = 0;
+    const stack = new Int32Array(W * H), labIn = [];
     for (let s = 0; s < W * H; s++) {
       if (gray[s] < 128 || labels[s] !== -1) continue;
-      const id = nLabels++; let top = 0; stack[top++] = s; labels[s] = id;
+      const id = nLabels++; labIn[id] = inside[s]; let top = 0; stack[top++] = s; labels[s] = id;
       while (top) {
         const p = stack[--top], x = p % W, y = (p / W) | 0;
         const nb = [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, y > 0 ? p - W : -1, y < H - 1 ? p + W : -1];
         for (const q of nb) if (q >= 0 && labels[q] === -1 && gray[q] >= 128) { labels[q] = id; stack[top++] = q; }
       }
     }
+    regionIn = labIn;
     // 線のふち(グレーの部分)にも隣の区画の色が回るよう、番号を少し広げておく
     paint = labels.slice();
     for (let pass = 0; pass < 4; pass++) {
@@ -198,9 +240,16 @@
       }
     }
     fills = new Array(nLabels).fill('#ffffff');
-    out = ctx.createImageData(W, H);
+    history = [];
     render();
-  };
+  }
+
+  function paintGroup(wantInside) {
+    const before = fills.slice();
+    fills = fills.map((f, l) => (regionIn[l] === wantInside ? current : f));
+    history.push(['all', before]); render();
+  }
+
   img.src = 'img/mini-template.png';
 
   function render() {
@@ -244,11 +293,25 @@
     history.push([l, fills[l]]); fills[l] = current; render();
   });
 
-  document.getElementById('undo').onclick = () => { const h = history.pop(); if (h) { fills[h[0]] = h[1]; render(); } };
+  document.getElementById('undo').onclick = () => {
+    const h = history.pop(); if (!h) return;
+    if (h[0] === 'all') fills = h[1]; else fills[h[0]] = h[1];
+    render();
+  };
+  document.getElementById('toHeart').onclick = () => { if (heartOn) paintGroup(1); };
+  document.getElementById('toAround').onclick = () => paintGroup(heartOn ? 0 : 0);
+  document.getElementById('heart').onchange = e => {
+    heartOn = e.target.checked;
+    document.getElementById('toHeart').disabled = !heartOn;
+    setup();
+  };
   document.getElementById('reset').onclick = () => { history = []; fills.fill('#ffffff'); render(); };
   document.getElementById('random').onclick = () => {
     const picks = COLORS.filter(c => !c[2]).sort(() => Math.random() - .5).slice(0, 3 + (Math.random() * 3 | 0)).map(c => c[1]);
-    history = []; fills = fills.map(() => picks[Math.random() * picks.length | 0]); render();
+    history = [];
+    if (heartOn) { const [a, b] = picks; fills = fills.map((f, l) => (regionIn[l] ? a : b)); }
+    else fills = fills.map(() => picks[Math.random() * picks.length | 0]);
+    render();
   };
   document.getElementById('save').onclick = () => {
     cv.toBlob(b => {
