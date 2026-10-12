@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dokkoishoichi12-ui.github.io/ami-kaijima-site/sitemap.xml
