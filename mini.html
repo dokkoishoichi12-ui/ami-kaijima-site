@@ -84,9 +84,12 @@
           </div>
         </div>
         <div>
-          <div class="label">SAVE</div>
-          <div class="row"><button class="btn buy" id="save" type="button">この配色を画像で保存</button></div>
-          <p class="now">保存した画像を、ご注文のときに送ってください。</p>
+          <div class="label">ORDER</div>
+          <div class="row">
+            <button class="btn buy" id="send" type="button">この配色で注文する</button>
+            <button class="btn" id="save" type="button">画像だけ保存</button>
+          </div>
+          <p class="now" id="sendNote">「この配色で注文する」を押すと、配色の画像つきでメールや DM を送れます。</p>
         </div>
       </div>
     </div>
@@ -113,8 +116,8 @@
   <section id="order">
     <h2>ORDER</h2>
     <ol class="steps-o">
-      <li>このページで色を決めて、画像を保存します</li>
-      <li>保存した画像を、Instagram の DM かメールで送ってください</li>
+      <li>このページで色を決めて、「この配色で注文する」を押します</li>
+      <li>配色の画像を、メールか Instagram の DM で送ってください(お名前とお受け取り方法も添えてください)</li>
       <li>内容を確認して、海島からお返事します</li>
     </ol>
     <dl class="info">
@@ -291,14 +294,36 @@
     const [a, b] = picks; fills = fills.map((f, l) => (regionIn[l] ? a : b));
     render();
   };
-  document.getElementById('save').onclick = () => {
-    cv.toBlob(b => {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(b); a.download = 'shikou-meiro-mini.png';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-    }, 'image/png');
+  // 使った色の名前をまとめる(注文メールの本文用)
+  function summary() {
+    const name = hex => (COLORS.find(c => c[1] === hex) || ['ホワイト'])[0];
+    const pick = want => { const n = {}; fills.forEach((f, l) => { if (regionIn[l] === want) n[f] = (n[f] || 0) + 1; });
+      return Object.keys(n).sort((a, b) => n[b] - n[a]).map(name).join('、'); };
+    const special = fills.some(f => METAL.has(f));
+    return `ハート:${pick(1)}\nまわり:${pick(0)}\n種類:${special ? '特別版 ¥16,500(税込)' : '通常版 ¥11,000(税込)'}`;
+  }
+  const toBlob = () => new Promise(r => cv.toBlob(r, 'image/png'));
+  function download(b) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b); a.download = 'shikou-meiro-mini.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+  document.getElementById('send').onclick = async () => {
+    const text = '思考迷路MINI のオーダーです。\n\n' + summary() + '\n\nお名前:\nお受け取り方法(手渡し・アトリエ受け取り・郵送):\n';
+    const b = await toBlob();
+    const file = new File([b], 'shikou-meiro-mini.png', { type: 'image/png' });
+    // iPhone などでは共有メニューから、画像つきでメールや Instagram に送れる
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: '思考迷路MINI オーダー', text }); return; }
+      catch (e) { if (e.name === 'AbortError') return; }
+    }
+    // 共有できない端末では、画像を保存してからメールを開く
+    download(b);
+    document.getElementById('sendNote').textContent = '画像を保存しました。開いたメールに、保存した画像を添付して送ってください。';
+    location.href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent('思考迷路MINI オーダー') + '&body=' + encodeURIComponent(text + '\n(保存した画像を添付してください)');
   };
+  document.getElementById('save').onclick = async () => download(await toBlob());
 })();
 </script>
 </body>
