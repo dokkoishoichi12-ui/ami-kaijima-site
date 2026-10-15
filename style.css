@@ -120,3 +120,8 @@ footer{padding:56px 0 48px;text-align:center;font-size:11px;color:var(--muted);l
 .mini-cta>span{min-width:0;font-size:12px;line-height:1.7;color:var(--muted)}
 .mini-cta .en{display:block;font-size:10px;letter-spacing:.25em;color:var(--pink)}
 .mini-cta b{display:block;font-weight:500;font-size:15px;color:var(--text)}
+/* 言語切り替え */
+header.wrap{position:relative}
+.lang-sw{position:absolute;top:12px;right:16px;background:none;border:1px solid var(--line);color:var(--muted);font-family:var(--font-en);font-size:11px;letter-spacing:.15em;padding:5px 10px;cursor:pointer}
+.lang-sw .on{color:var(--pink)}
+.lang-sw:focus-visible{outline:2px solid var(--pink);outline-offset:2px}

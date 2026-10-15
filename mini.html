@@ -57,8 +57,8 @@
 
 <main class="wrap">
   <section id="simulator">
-    <h2>思考迷路MINI ORDER</h2>
-    <p class="center" style="font-size:13px;color:var(--muted)">好きな色を選んで、ハートとまわりに色を入れてみてください。<br>迷路をタップすると、1区画ずつ塗り分けもできます。<br>あなただけの思考迷路MINIを、受注制作でお作りします。</p>
+    <h2 data-en="Shikou Meiro MINI ORDER">思考迷路MINI ORDER</h2>
+    <p class="center" style="font-size:13px;color:var(--muted)" data-en="Pick your favorite colors and fill in the heart and its surroundings.&lt;br&gt;Tap the maze to color it one section at a time.&lt;br&gt;Each Shikou Meiro (Thought Maze) MINI is made to order, just for you.">好きな色を選んで、ハートとまわりに色を入れてみてください。<br>迷路をタップすると、1区画ずつ塗り分けもできます。<br>あなただけの思考迷路MINIを、受注制作でお作りします。</p>
 
     <div class="sim">
       <div>
@@ -75,26 +75,26 @@
         <div>
           <div class="label">2 COLORS</div>
           <div class="row">
-            <button class="btn" id="toHeart" type="button">選んだ色をハートに</button>
-            <button class="btn" id="toAround" type="button">選んだ色をまわりに</button>
+            <button class="btn" id="toHeart" type="button" data-en="Color the heart">選んだ色をハートに</button>
+            <button class="btn" id="toAround" type="button" data-en="Color the surroundings">選んだ色をまわりに</button>
           </div>
-          <p class="now">ハートとまわりを、それぞれ一度に塗れます。細かい部分は迷路をタップして塗り分けてください。</p>
+          <p class="now" data-en="Fill the heart and its surroundings in one go. Tap the maze to color smaller parts.">ハートとまわりを、それぞれ一度に塗れます。細かい部分は迷路をタップして塗り分けてください。</p>
         </div>
         <div>
           <div class="label">TOOLS</div>
           <div class="row">
-            <button class="btn" id="undo" type="button">ひとつ戻す</button>
-            <button class="btn" id="random" type="button">おまかせ配色</button>
-            <button class="btn" id="reset" type="button">リセット</button>
+            <button class="btn" id="undo" type="button" data-en="Undo">ひとつ戻す</button>
+            <button class="btn" id="random" type="button" data-en="Surprise me">おまかせ配色</button>
+            <button class="btn" id="reset" type="button" data-en="Reset">リセット</button>
           </div>
         </div>
         <div>
           <div class="label">ORDER</div>
           <div class="row">
-            <button class="btn buy" id="send" type="button">この配色で注文する</button>
-            <button class="btn" id="save" type="button">画像だけ保存</button>
+            <button class="btn buy" id="send" type="button" data-en="Order with these colors">この配色で注文する</button>
+            <button class="btn" id="save" type="button" data-en="Save image only">画像だけ保存</button>
           </div>
-          <p class="now" id="sendNote">「この配色で注文する」を押すと、配色の画像つきでメールや DM を送れます。</p>
+          <p class="now" id="sendNote" data-en="Tap “Order with these colors” to send the image by email or DM.">「この配色で注文する」を押すと、配色の画像つきでメールや DM を送れます。</p>
         </div>
       </div>
     </div>
@@ -103,41 +103,43 @@
   <section id="order">
     <h2>HOW TO ORDER</h2>
     <ol class="steps-o">
-      <li>上のプレビューで色を決めます</li>
-      <li>「この配色で注文する」を押して、配色の画像をメールか Instagram の DM で送ってください。<br>うまく送れないときは、「画像だけ保存」してから、下のテンプレートをコピーして送ってください</li>
-      <li>内容を確認して、海島からお返事します。そのときに Square のお支払いリンクをお送りします</li>
-      <li>お支払いを確認してから制作を始めます。完成は、お支払いの確認から1ヶ月以内です</li>
+      <li data-en="Choose your colors in the preview above">上のプレビューで色を決めます</li>
+      <li data-en="Tap “Order with these colors” and send the image by email or Instagram DM.&lt;br&gt;If that doesn’t work, tap “Save image only”, then copy the template below and send it with the image">「この配色で注文する」を押して、配色の画像をメールか Instagram の DM で送ってください。<br>うまく送れないときは、「画像だけ保存」してから、下のテンプレートをコピーして送ってください</li>
+      <li data-en="Kaijima will check your order and reply with a Square payment link">内容を確認して、海島からお返事します。そのときに Square のお支払いリンクをお送りします</li>
+      <li data-en="Work begins once payment is confirmed. Your MINI will be finished within one month of payment">お支払いを確認してから制作を始めます。完成は、お支払いの確認から1ヶ月以内です</li>
     </ol>
 
     <div class="tpl">
       <div class="label">TEMPLATE</div>
       <pre id="tpl"></pre>
       <div class="row">
-        <button class="btn" id="copy" type="button">テンプレートをコピー</button>
-        <a class="btn" id="dm" href="https://ig.me/m/amikaijima" target="_blank" rel="noopener">Instagram DM を開く</a>
-        <a class="btn" id="mail" href="mailto:kaijimaami@gmail.com">メールを開く</a>
+        <button class="btn" id="copy" type="button" data-en="Copy template">テンプレートをコピー</button>
+        <a class="btn" id="dm" href="https://ig.me/m/amikaijima" target="_blank" rel="noopener" data-en="Open Instagram DM">Instagram DM を開く</a>
+        <a class="btn" id="mail" href="mailto:kaijimaami@gmail.com" data-en="Open email">メールを開く</a>
       </div>
-      <p class="now" id="copyNote">配色を変えると、テンプレートの色の名前も自動で変わります。</p>
+      <p class="now" id="copyNote" data-en="The color names in the template update automatically.">配色を変えると、テンプレートの色の名前も自動で変わります。</p>
     </div>
 
     <dl class="info">
-      <dt>価格</dt>
-      <dd>¥11,000(税込)</dd>
-      <dt>特別版</dt>
-      <dd>¥16,500(税込)。ゴールドやシルバーを使うもの、真ん中をハートではなく文字にするものは特別版になります。文字のご希望は、ご注文のときにお知らせください。</dd>
-      <dt>完成まで</dt>
-      <dd>お支払いの確認から1ヶ月以内にお作りします。</dd>
-      <dt>お支払い</dt>
-      <dd>内容を確認したあと、Square のお支払いリンクをお送りします。</dd>
-      <dt>お渡し</dt>
-      <dd>広島市内でしたら、手渡しも可能です。アトリエ(Oh Studio Hiroshima)での受け取りもできます。</dd>
+      <dt data-en="Price">価格</dt>
+      <dd data-en="¥11,000 (tax incl.)">¥11,000(税込)</dd>
+      <dt data-en="Special edition">特別版</dt>
+      <dd data-en="¥16,500 (tax incl.). Pieces using gold or silver, or with lettering instead of a heart in the center, are special editions. Please tell us the lettering you’d like when you order.">¥16,500(税込)。ゴールドやシルバーを使うもの、真ん中をハートではなく文字にするものは特別版になります。文字のご希望は、ご注文のときにお知らせください。</dd>
+      <dt data-en="Completion">完成まで</dt>
+      <dd data-en="Within one month after payment is confirmed.">お支払いの確認から1ヶ月以内にお作りします。</dd>
+      <dt data-en="Payment">お支払い</dt>
+      <dd data-en="After checking your order, we’ll send you a Square payment link.">内容を確認したあと、Square のお支払いリンクをお送りします。</dd>
+      <dt data-en="Pick-up &amp;amp; delivery">お渡し</dt>
+      <dd data-en="Within Hiroshima City, hand delivery is possible. You can also pick up at the atelier (Oh Studio Hiroshima).">広島市内でしたら、手渡しも可能です。アトリエ(Oh Studio Hiroshima)での受け取りもできます。</dd>
+      <dt data-en="International shipping">海外発送</dt>
+      <dd data-en="Shipping overseas is available on request. Please contact us.">海外への発送はご相談ください。</dd>
     </dl>
-    <p class="center" style="margin-top:28px"><a class="btn" href="shop.html">SHOP へ戻る</a></p>
+    <p class="center" style="margin-top:28px"><a class="btn" href="shop.html" data-en="Back to SHOP">SHOP へ戻る</a></p>
   </section>
 
   <section id="gallery">
     <h2>GALLERY</h2>
-    <p class="center" style="font-size:13px;color:var(--muted)">これまでの思考迷路MINI。配色の参考にどうぞ。</p>
+    <p class="center" style="font-size:13px;color:var(--muted)" data-en="Past Shikou Meiro MINI works, for color inspiration.">これまでの思考迷路MINI。配色の参考にどうぞ。</p>
     <div class="mini-grid">
       <img src="img/mini/mini-01.webp" alt="思考迷路MINI(過去の作品)" width="640" height="640" loading="lazy">
       <img src="img/mini/mini-02.webp" alt="思考迷路MINI(過去の作品)" width="640" height="640" loading="lazy">
@@ -156,6 +158,7 @@
 
 <footer>© 2026 AMI KAIJIMA / 海島亜美</footer>
 
+<script src="i18n.js"></script>
 <script>
 (() => {
   // 色の候補(本人と相談して差し替え)
@@ -167,6 +170,9 @@
     ['クリーム', '#f0e2a0'], ['ブラウン', '#6b2f2a'], ['グレー', '#7d8285'], ['ホワイト', '#f4f2ef'],
     ['ゴールド(特別版)', '#c9a24a', 'metal'], ['シルバー(特別版)', '#b9bec4', 'metal'],
   ];
+  const EN_NAMES = {"ネオンピンク": "Neon pink", "ピンク": "Pink", "ライトピンク": "Light pink", "レッド": "Red", "バーミリオン": "Vermilion", "オレンジ": "Orange", "イエロー": "Yellow", "ネオンイエロー": "Neon yellow", "ライム": "Lime", "グリーン": "Green", "ミント": "Mint", "ターコイズ": "Turquoise", "スカイブルー": "Sky blue", "ブルー": "Blue", "ネイビー": "Navy", "パープル": "Purple", "バイオレット": "Violet", "ラベンダー": "Lavender", "クリーム": "Cream", "ブラウン": "Brown", "グレー": "Gray", "ホワイト": "White", "ゴールド(特別版)": "Gold (special edition)", "シルバー(特別版)": "Silver (special edition)"};
+  const L = (ja, en) => (window.LANG === 'en' ? en : ja);
+  const cname = ja => L(ja, EN_NAMES[ja] || ja);
   const METAL = new Set(COLORS.filter(c => c[2]).map(c => c[1]));
   const cv = document.getElementById('cv'), ctx = cv.getContext('2d'), price = document.getElementById('price');
   const W = cv.width, H = cv.height;
@@ -178,15 +184,15 @@
   COLORS.forEach(([name, hex], i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'sw'; b.style.background = METAL.has(hex) ? `linear-gradient(135deg, #fff8 0%, ${hex} 35%, #0004 100%), ${hex}` : hex;
-    b.setAttribute('aria-label', name); b.setAttribute('aria-pressed', i === 0);
+    b.setAttribute('aria-label', name + ' / ' + (EN_NAMES[name] || name)); b.setAttribute('aria-pressed', i === 0);
     b.onclick = () => {
       current = hex;
       box.querySelectorAll('.sw').forEach(x => x.setAttribute('aria-pressed', x === b));
-      now.textContent = '選んでいる色:' + name;
+      now.dataset.c = name; now.textContent = L('選んでいる色:', 'Selected: ') + cname(name);
     };
     box.appendChild(b);
   });
-  now.textContent = '選んでいる色:' + COLORS[0][0];
+  now.dataset.c = COLORS[0][0]; now.textContent = L('選んでいる色:', 'Selected: ') + cname(COLORS[0][0]);
 
   const hex2rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 
@@ -269,7 +275,7 @@
     ctx.putImageData(out, 0, 0);
     updateTemplate();
     const special = fills.some(f => METAL.has(f));
-    price.textContent = special ? '10 × 10 × 3.7cm / 特別版 ¥16,500(税込)' : '10 × 10 × 3.7cm / ¥11,000(税込)';
+    price.textContent = '10 × 10 × 3.7cm / ' + (special ? L('特別版 ¥16,500(税込)', 'Special edition ¥16,500 (tax incl.)') : L('¥11,000(税込)', '¥11,000 (tax incl.)'));
   }
 
   function labelAt(x, y) {
@@ -309,11 +315,12 @@
   };
   // 使った色の名前をまとめる(注文メールの本文用)
   function summary() {
-    const name = hex => (COLORS.find(c => c[1] === hex) || ['ホワイト'])[0];
+    const name = hex => cname((COLORS.find(c => c[1] === hex) || ['ホワイト'])[0]);
     const pick = want => { const n = {}; fills.forEach((f, l) => { if (regionIn[l] === want) n[f] = (n[f] || 0) + 1; });
-      return Object.keys(n).sort((a, b) => n[b] - n[a]).map(name).join('、'); };
+      return Object.keys(n).sort((a, b) => n[b] - n[a]).map(name).join(L('、', ', ')); };
     const special = fills.some(f => METAL.has(f));
-    return `ハート:${pick(1)}\nまわり:${pick(0)}\n種類:${special ? '特別版 ¥16,500(税込)' : '通常版 ¥11,000(税込)'}`;
+    return L(`ハート:${pick(1)}\nまわり:${pick(0)}\n種類:${special ? '特別版 ¥16,500(税込)' : '通常版 ¥11,000(税込)'}`,
+      `Heart: ${pick(1)}\nSurroundings: ${pick(0)}\nType: ${special ? 'Special edition ¥16,500 (tax incl.)' : 'Regular ¥11,000 (tax incl.)'}`);
   }
   const toBlob = () => new Promise(r => cv.toBlob(r, 'image/png'));
   function download(b) {
@@ -322,17 +329,18 @@
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   }
-  const orderText = () => '思考迷路MINI のオーダーです。\n\n' + summary() + '\n\nお名前:\nお受け取り方法(手渡し・アトリエ受け取り・郵送):\n';
+  const orderText = () => L('思考迷路MINI のオーダーです。\n\n' + summary() + '\n\nお名前:\nお受け取り方法(手渡し・アトリエ受け取り・郵送):\n',
+    'Shikou Meiro MINI order\n\n' + summary() + '\n\nName:\nDelivery (hand delivery / atelier pick-up / shipping):\nCountry:\n');
   function updateTemplate() {
     if (!regionIn.length) return;
     const t = orderText();
     document.getElementById('tpl').textContent = t;
-    document.getElementById('mail').href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent('思考迷路MINI オーダー') + '&body=' + encodeURIComponent(t + '\n(配色の画像を添付してください)');
+    document.getElementById('mail').href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent(L('思考迷路MINI オーダー', 'Shikou Meiro MINI order')) + '&body=' + encodeURIComponent(t + L('\n(配色の画像を添付してください)', '\n(Please attach the color image)'));
   }
   document.getElementById('copy').onclick = async () => {
     const note = document.getElementById('copyNote');
-    try { await navigator.clipboard.writeText(orderText()); note.textContent = 'コピーしました。DM かメールに貼り付けてください。'; }
-    catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById('tpl')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); note.textContent = '文章を選択しました。長押しでコピーしてください。'; }
+    try { await navigator.clipboard.writeText(orderText()); note.textContent = L('コピーしました。DM かメールに貼り付けてください。', 'Copied. Paste it into a DM or email.'); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById('tpl')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); note.textContent = L('文章を選択しました。長押しでコピーしてください。', 'Text selected. Long-press to copy.'); }
   };
   document.getElementById('send').onclick = async () => {
     const text = orderText();
@@ -340,14 +348,18 @@
     const file = new File([b], 'shikou-meiro-mini.png', { type: 'image/png' });
     // iPhone などでは共有メニューから、画像つきでメールや Instagram に送れる
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      try { await navigator.share({ files: [file], title: '思考迷路MINI オーダー', text }); return; }
+      try { await navigator.share({ files: [file], title: L('思考迷路MINI オーダー', 'Shikou Meiro MINI order'), text }); return; }
       catch (e) { if (e.name === 'AbortError') return; }
     }
     // 共有できない端末では、画像を保存してからメールを開く
     download(b);
-    document.getElementById('sendNote').textContent = '画像を保存しました。開いたメールに、保存した画像を添付して送ってください。';
-    location.href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent('思考迷路MINI オーダー') + '&body=' + encodeURIComponent(text + '\n(保存した画像を添付してください)');
+    document.getElementById('sendNote').textContent = L('画像を保存しました。開いたメールに、保存した画像を添付して送ってください。', 'Image saved. Attach it to the email that opens and send.');
+    location.href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent(L('思考迷路MINI オーダー', 'Shikou Meiro MINI order')) + '&body=' + encodeURIComponent(text + L('\n(保存した画像を添付してください)', '\n(Please attach the saved image)'));
   };
+  document.addEventListener('langchange', () => {
+    now.textContent = L('選んでいる色:', 'Selected: ') + cname(now.dataset.c);
+    if (out) render();
+  });
   document.getElementById('save').onclick = async () => download(await toBlob());
 })();
 </script>
