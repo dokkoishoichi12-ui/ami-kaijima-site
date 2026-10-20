@@ -66,6 +66,17 @@
         <li data-en="You take the drawing home, and its trace stays on the wall artwork (pick-up later or shipping is also possible)">描いた絵はお持ち帰りいただき、写しは壁の作品に残ります(後日のお渡し・郵送もできます)</li>
       </ol>
       <p class="note" data-en="Times may shift a little on the day. Updates are posted on &lt;a href=&quot;https://www.instagram.com/amikaijima/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Instagram&lt;/a&gt;. We look forward to seeing you.">時間は当日の様子で前後することがあります。最新情報は <a href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">Instagram</a> でお知らせします。是非お越しください。</p>
+      <!-- ▼ 予約状況(Google スプレッドシート「Open Day 予約状況(サイト表示用)」から自動で読み込み) -->
+      <div class="booking" id="booking" data-sheet="1znmPx_9JO2gWZIxKsRpJry9dxcl38B8VUyGwnLlBQ-E">
+        <div class="label" data-en="BOOKING">予約状況</div>
+        <ul class="slots" id="slots"><li class="slot-wait" data-en="Loading…">読み込み中…</li></ul>
+        <p class="note" id="slotNote" data-en="Availability is updated as bookings come in. Walk-ins are very welcome, too.">予約が入りしだい更新しています。飛び入りも大歓迎です。</p>
+        <div class="row book-btns">
+          <a class="btn buy" href="https://ig.me/m/amikaijima" target="_blank" rel="noopener" data-en="Book via Instagram DM">Instagram DM で予約</a>
+          <a class="btn" id="bookMail" href="mailto:kaijimaami@gmail.com" data-en="Book by email">メールで予約</a>
+        </div>
+      </div>
+      <!-- ▲ 予約状況 -->
     </article>
     <a class="mini-cta" href="mini.html">
       <img src="img/mini/mini-05.webp" alt="思考迷路MINI" width="640" height="640">
@@ -194,5 +205,56 @@
 
 <footer>© 2026 AMI KAIJIMA / 海島亜美</footer>
 <script src="i18n.js"></script>
+<script>
+// Open Day の予約状況を Google スプレッドシートから読み込む
+(() => {
+  const box = document.getElementById('booking'); if (!box) return;
+  const url = 'https://docs.google.com/spreadsheets/d/' + box.dataset.sheet + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent('予約状況') + '&t=' + Date.now();
+  const L = (ja, en) => (window.LANG === 'en' ? en : ja);
+  const ST = { '空きあり': ['ok', 'Available'], '残りわずか': ['few', 'Few spots left'], '満席': ['full', 'Full'] };
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DOW = { '日':'Sun','月':'Mon','火':'Tue','水':'Wed','木':'Thu','金':'Fri','土':'Sat' };
+  const enDate = d => d.replace(/(\d+)\/(\d+)\s*[((]?([日月火水木金土])?[))]?/, (m, mo, da, w) => `${MON[mo - 1]} ${da}` + (w ? ` (${DOW[w]})` : ''));
+  let rows = null;
+  function parse(t) {
+    const out = []; let row = [], cur = '', q = false;
+    for (let i = 0; i < t.length; i++) {
+      const c = t[i];
+      if (q) { if (c === '"' && t[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') q = false; else cur += c; }
+      else if (c === '"') q = true;
+      else if (c === ',') { row.push(cur); cur = ''; }
+      else if (c === '\n') { row.push(cur); out.push(row); row = []; cur = ''; }
+      else if (c !== '\r') cur += c;
+    }
+    if (cur || row.length) { row.push(cur); out.push(row); }
+    return out;
+  }
+  function draw() {
+    const ul = document.getElementById('slots');
+    if (!rows) return;
+    ul.innerHTML = '';
+    if (!rows.length) { ul.innerHTML = '<li class="slot-wait">' + L('予約状況は Instagram でお知らせしています', 'Please check Instagram for availability') + '</li>'; return; }
+    rows.forEach(([date, time, st, memo]) => {
+      const li = document.createElement('li');
+      const s = ST[st] || ['ok', st];
+      li.className = 'slot ' + s[0];
+      li.innerHTML = '<span class="when"></span><span class="st"></span>';
+      li.querySelector('.when').textContent = (window.LANG === 'en' ? enDate(date) : date) + ' ' + time + (memo && window.LANG !== 'en' ? '(' + memo + ')' : '');
+      li.querySelector('.st').textContent = L(st, s[1]);
+      ul.appendChild(li);
+    });
+  }
+  function mail() {
+    const body = L('Open Day「Brain Trace」の予約をお願いします。\n\nお名前:\nご希望の日時:\n人数:\n', 'I would like to book Open Day "Brain Trace".\n\nName:\nPreferred date & time:\nNumber of people:\n');
+    document.getElementById('bookMail').href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent(L('Open Day 予約', 'Open Day booking')) + '&body=' + encodeURIComponent(body);
+  }
+  fetch(url).then(r => { if (!r.ok) throw 0; return r.text(); }).then(t => {
+    rows = parse(t).slice(1).filter(r => r[0] && r[1]);
+    draw();
+  }).catch(() => { rows = []; draw(); });
+  document.addEventListener('langchange', () => { draw(); mail(); });
+  mail();
+})();
+</script>
 </body>
 </html>

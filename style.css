@@ -125,3 +125,17 @@ header.wrap{position:relative}
 .lang-sw{position:absolute;top:12px;right:16px;background:none;border:1px solid var(--line);color:var(--muted);font-family:var(--font-en);font-size:11px;letter-spacing:.15em;padding:5px 10px;cursor:pointer}
 .lang-sw .on{color:var(--pink)}
 .lang-sw:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+/* Open Day 予約状況 */
+.booking{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.booking .label{font-family:var(--font-en);font-size:11px;letter-spacing:.25em;color:var(--pink);margin-bottom:8px}
+.slots{list-style:none;display:grid;gap:6px;margin-bottom:10px}
+.slot{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:7px 10px;border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.slot .when{min-width:0}
+.slot .st{flex:none;font-size:12px}
+.slot.ok .st{color:#7fe0a8}
+.slot.few .st{color:#ffd166}
+.slot.full{opacity:.55}
+.slot.full .st{color:var(--muted)}
+.slot-wait{font-size:13px;color:var(--muted)}
+.book-btns{display:flex;flex-wrap:wrap;gap:8px}
+.book-btns .btn{margin-top:0}
