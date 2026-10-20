@@ -56,7 +56,7 @@
       <dl class="facts">
         <dt data-en="Date &amp;amp; time">日時</dt><dd data-en="Sat, Oct 24, 19:30–23:00&lt;br&gt;Sun, Oct 25, 11:00–19:00">10/24(土)19:30〜23:00<br>10/25(日)11:00〜19:00</dd>
         <dt data-en="Venue">場所</dt><dd data-en="Oh Studio Hiroshima 4F&lt;br&gt;9-13 Komachi, Naka-ku, Hiroshima">Oh Studio Hiroshima 4F<br>広島市中区小町9-13</dd>
-        <dt data-en="Duration">所要時間</dt><dd data-en="About 15 minutes per person">1人 15分前後</dd>
+        <dt data-en="Duration">所要時間</dt><dd data-en="About 30 minutes per person">1人 30分ほど</dd>
         <dt data-en="Fee">参加費</dt><dd data-en="500 yen">500円</dd>
         <dt data-en="How to join">参加方法</dt><dd data-en="Book via Instagram DM. Walk-ins are very welcome, too.">Instagram の DM でご予約ください。飛び入りも大歓迎です</dd>
       </dl>
@@ -263,7 +263,8 @@
     });
     const lg = document.createElement('li');
     lg.className = 'legend';
-    lg.innerHTML = ['ok', 'few', 'full'].map(k => '<span class="chip ' + k + '">' + L({ ok: '空きあり', few: '残りわずか', full: '満席' }[k], { ok: 'Available', few: 'Few left', full: 'Full' }[k]) + '</span>').join('');
+    const used = rows.some(r => r[2] === '残りわずか') ? ['ok', 'few', 'full'] : ['ok', 'full'];
+    lg.innerHTML = used.map(k => '<span class="chip ' + k + '">' + L({ ok: '空きあり', few: '残りわずか', full: '満席' }[k], { ok: 'Available', few: 'Few left', full: 'Full' }[k]) + '</span>').join('');
     ul.appendChild(lg);
   }
   function mail() {
