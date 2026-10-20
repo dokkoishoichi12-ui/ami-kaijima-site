@@ -150,3 +150,16 @@ header.wrap{position:relative}
 .chip.full::before{background:var(--muted)}
 .slots .legend{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px}
 .slots .legend .chip{border:0;padding:0 6px 0 0;opacity:1;text-decoration:none;color:var(--muted)}
+/* 予約:選択式 */
+.booking .step{font-size:13px;margin:10px 0 8px}
+.booking .left{color:var(--pink);margin-left:6px}
+.booking .days{display:flex;flex-wrap:wrap;gap:8px}
+.booking .days .btn{margin:0;background:none;cursor:pointer;font-family:inherit}
+.booking .days .btn.on{background:var(--pink-strong);border-color:var(--pink-strong);color:#fff}
+.booking button.chip{background:none;color:var(--text);cursor:pointer;font-family:inherit}
+.booking button.chip:disabled{cursor:default}
+.booking button.chip.on{border-color:var(--pink);background:var(--pink-strong);color:#fff}
+.booking button.chip.on::before{background:#fff}
+.booking .chip.tbd::before{background:var(--muted)}
+.booking .picked{font-size:14px;margin:14px 0 8px}
+.booking > .note:last-child{margin-top:12px}

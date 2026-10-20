@@ -68,13 +68,22 @@
       <p class="note" data-en="Times may shift a little on the day. Updates are posted on &lt;a href=&quot;https://www.instagram.com/amikaijima/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Instagram&lt;/a&gt;. We look forward to seeing you.">時間は当日の様子で前後することがあります。最新情報は <a href="https://www.instagram.com/amikaijima/" target="_blank" rel="noopener">Instagram</a> でお知らせします。是非お越しください。</p>
       <!-- ▼ 予約状況(Google スプレッドシート「Open Day 予約状況(サイト表示用)」から自動で読み込み) -->
       <div class="booking" id="booking" data-sheet="1znmPx_9JO2gWZIxKsRpJry9dxcl38B8VUyGwnLlBQ-E">
-        <div class="label" data-en="BOOKING">予約状況</div>
-        <ul class="slots" id="slots"><li class="slot-wait" data-en="Loading…">読み込み中…</li></ul>
-        <p class="note" id="slotNote" data-en="Availability is updated as bookings come in. Walk-ins are very welcome, too.">予約が入りしだい更新しています。飛び入りも大歓迎です。</p>
-        <div class="row book-btns">
-          <a class="btn buy" href="https://ig.me/m/amikaijima" target="_blank" rel="noopener" data-en="Book via Instagram DM">Instagram DM で予約</a>
-          <a class="btn" id="bookMail" href="mailto:kaijimaami@gmail.com" data-en="Book by email">メールで予約</a>
+        <div class="label" data-en="BOOKING">ご予約</div>
+        <p class="step" data-en="1. Choose a day">① 日にちを選んでください</p>
+        <div class="days" id="days"></div>
+        <div id="dayPanel" hidden>
+          <p class="step"><span data-en="2. Choose a time">② 時間を選んでください</span><span class="left" id="left"></span></p>
+          <div class="chips" id="chips"></div>
         </div>
+        <div id="pick" hidden>
+          <p class="picked" id="picked"></p>
+          <div class="row book-btns">
+            <a class="btn buy" id="bookDm" href="https://ig.me/m/amikaijima" target="_blank" rel="noopener" data-en="Book via Instagram DM">Instagram DM で予約</a>
+            <a class="btn" id="bookMail" href="mailto:kaijimaami@gmail.com" data-en="Book by email">メールで予約</a>
+          </div>
+          <p class="note" id="dmNote" data-en="Tapping the DM button copies your booking message. Just paste it in the DM.">DM のボタンを押すと、予約の文章がコピーされます。DM に貼り付けて送ってください。</p>
+        </div>
+        <p class="note" data-en="Walk-ins are very welcome, too.">飛び入りも大歓迎です。</p>
       </div>
       <!-- ▲ 予約状況 -->
     </article>
@@ -207,16 +216,18 @@
 <footer>© 2026 AMI KAIJIMA / 海島亜美</footer>
 <script src="i18n.js"></script>
 <script>
-// Open Day の予約状況を Google スプレッドシートから読み込む
+// Open Day の予約:Google スプレッドシートから枠を読み込み、日にち→時間の順に選んでもらう
 (() => {
   const box = document.getElementById('booking'); if (!box) return;
   const url = 'https://docs.google.com/spreadsheets/d/' + box.dataset.sheet + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent('予約状況') + '&t=' + Date.now();
   const L = (ja, en) => (window.LANG === 'en' ? en : ja);
-  const ST = { '空きあり': ['ok', 'Available'], '残りわずか': ['few', 'Few spots left'], '満席': ['full', 'Full'] };
   const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const DOW = { '日':'Sun','月':'Mon','火':'Tue','水':'Wed','木':'Thu','金':'Fri','土':'Sat' };
   const enDate = d => d.replace(/(\d+)\/(\d+)\s*[((]?([日月火水木金土])?[))]?/, (m, mo, da, w) => `${MON[mo - 1]} ${da}` + (w ? ` (${DOW[w]})` : ''));
-  let rows = null;
+  const show = d => (window.LANG === 'en' ? enDate(d) : d);
+  const $ = id => document.getElementById(id);
+  let days = [], day = null, time = null; // time: '' は時間未定
+
   function parse(t) {
     const out = []; let row = [], cur = '', q = false;
     for (let i = 0; i < t.length; i++) {
@@ -230,53 +241,67 @@
     if (cur || row.length) { row.push(cur); out.push(row); }
     return out;
   }
-  function draw() {
-    const ul = document.getElementById('slots');
-    if (!rows) return;
-    ul.innerHTML = '';
-    if (!rows.length) { ul.innerHTML = '<li class="slot-wait">' + L('予約状況は Instagram でお知らせしています', 'Please check Instagram for availability') + '</li>'; return; }
-    // 日付ごとにまとめて、時間を小さなチップで並べる
-    const days = [];
-    rows.forEach(([date, time, st]) => {
-      let d = days.find(x => x.date === date);
-      if (!d) days.push(d = { date, slots: [] });
-      d.slots.push([time, st]);
-    });
+  const message = () => {
+    const when = show(day.date) + ' ' + (time ? time : L('時間未定', 'time not decided yet'));
+    return L(`Open Day「Brain Trace」の予約をお願いします。\n希望日時:${when}\nお名前:\n人数:\n`,
+             `I'd like to book Open Day "Brain Trace".\nDate & time: ${when}\nName:\nNumber of people:\n`);
+  };
+
+  function drawDays() {
+    const wrap = $('days'); wrap.innerHTML = '';
     days.forEach(d => {
-      const li = document.createElement('li');
-      li.className = 'day';
-      const h = document.createElement('div');
-      h.className = 'day-h';
-      h.textContent = window.LANG === 'en' ? enDate(d.date) : d.date;
-      const chips = document.createElement('div');
-      chips.className = 'chips';
-      d.slots.forEach(([time, st]) => {
-        const c = document.createElement('span');
-        const s = ST[st] || ['ok', st];
-        c.className = 'chip ' + s[0];
-        c.textContent = time.split(/[〜~\-–]/)[0].trim();
-        c.title = time + ' ' + L(st, s[1]);
-        chips.appendChild(c);
-      });
-      li.append(h, chips);
-      ul.appendChild(li);
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn' + (d === day ? ' on' : '');
+      b.textContent = show(d.date);
+      b.onclick = () => { day = d; time = null; drawDays(); drawDay(); };
+      wrap.appendChild(b);
     });
-    const lg = document.createElement('li');
-    lg.className = 'legend';
-    const used = rows.some(r => r[2] === '残りわずか') ? ['ok', 'few', 'full'] : ['ok', 'full'];
-    lg.innerHTML = used.map(k => '<span class="chip ' + k + '">' + L({ ok: '空きあり', few: '残りわずか', full: '満席' }[k], { ok: 'Available', few: 'Few left', full: 'Full' }[k]) + '</span>').join('');
-    ul.appendChild(lg);
   }
-  function mail() {
-    const body = L('Open Day「Brain Trace」の予約をお願いします。\n\nお名前:\nご希望の日時:\n人数:\n', 'I would like to book Open Day "Brain Trace".\n\nName:\nPreferred date & time:\nNumber of people:\n');
-    document.getElementById('bookMail').href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent(L('Open Day 予約', 'Open Day booking')) + '&body=' + encodeURIComponent(body);
+  function drawDay() {
+    $('dayPanel').hidden = !day; $('pick').hidden = !day || time === null;
+    if (!day) return;
+    const left = day.slots.filter(s => s[1] !== '満席').length;
+    $('left').textContent = left ? L(`(残り ${left} 枠)`, ` (${left} left)`) : L('(満席です)', ' (fully booked)');
+    const c = $('chips'); c.innerHTML = '';
+    day.slots.forEach(([t, st]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      const full = st === '満席';
+      b.className = 'chip ' + (full ? 'full' : 'ok') + (t === time ? ' on' : '');
+      b.disabled = full;
+      b.textContent = t.split(/[〜~\-–]/)[0].trim();
+      b.onclick = () => { time = t; drawDay(); };
+      c.appendChild(b);
+    });
+    const u = document.createElement('button');
+    u.type = 'button'; u.className = 'chip tbd' + (time === '' ? ' on' : '');
+    u.textContent = L('時間未定', 'Not sure yet');
+    u.onclick = () => { time = ''; drawDay(); };
+    c.appendChild(u);
+    if (time !== null) {
+      $('picked').textContent = L('選んだ日時:', 'Selected: ') + show(day.date) + ' ' + (time || L('時間未定', 'time not decided yet'));
+      $('bookMail').href = 'mailto:kaijimaami@gmail.com?subject=' + encodeURIComponent(L('Open Day 予約', 'Open Day booking')) + '&body=' + encodeURIComponent(message());
+    }
+  }
+  $('bookDm').addEventListener('click', () => {
+    try { navigator.clipboard.writeText(message()); } catch (e) {}
+  });
+  function fallback() {
+    // 読み込めないときは、日にちを選ばずにそのまま予約できるようにする
+    box.querySelectorAll('.step, #days, #dayPanel').forEach(el => el.hidden = true);
+    $('pick').hidden = false; $('dmNote').hidden = true;
+    $('picked').textContent = L('予約状況は Instagram でお知らせしています。', 'Please check Instagram for availability.');
   }
   fetch(url).then(r => { if (!r.ok) throw 0; return r.text(); }).then(t => {
-    rows = parse(t).slice(1).filter(r => r[0] && r[1]);
-    draw();
-  }).catch(() => { rows = []; draw(); });
-  document.addEventListener('langchange', () => { draw(); mail(); });
-  mail();
+    parse(t).slice(1).filter(r => r[0] && r[1]).forEach(([date, tm, st]) => {
+      let d = days.find(x => x.date === date);
+      if (!d) days.push(d = { date, slots: [] });
+      d.slots.push([tm, st]);
+    });
+    if (!days.length) return fallback();
+    drawDays();
+  }).catch(fallback);
+  document.addEventListener('langchange', () => { if (days.length) { drawDays(); drawDay(); } });
 })();
 </script>
 </body>
