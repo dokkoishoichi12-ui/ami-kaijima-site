@@ -235,15 +235,36 @@
     if (!rows) return;
     ul.innerHTML = '';
     if (!rows.length) { ul.innerHTML = '<li class="slot-wait">' + L('予約状況は Instagram でお知らせしています', 'Please check Instagram for availability') + '</li>'; return; }
-    rows.forEach(([date, time, st, memo]) => {
+    // 日付ごとにまとめて、時間を小さなチップで並べる
+    const days = [];
+    rows.forEach(([date, time, st]) => {
+      let d = days.find(x => x.date === date);
+      if (!d) days.push(d = { date, slots: [] });
+      d.slots.push([time, st]);
+    });
+    days.forEach(d => {
       const li = document.createElement('li');
-      const s = ST[st] || ['ok', st];
-      li.className = 'slot ' + s[0];
-      li.innerHTML = '<span class="when"></span><span class="st"></span>';
-      li.querySelector('.when').textContent = (window.LANG === 'en' ? enDate(date) : date) + ' ' + time + (memo && window.LANG !== 'en' ? '(' + memo + ')' : '');
-      li.querySelector('.st').textContent = L(st, s[1]);
+      li.className = 'day';
+      const h = document.createElement('div');
+      h.className = 'day-h';
+      h.textContent = window.LANG === 'en' ? enDate(d.date) : d.date;
+      const chips = document.createElement('div');
+      chips.className = 'chips';
+      d.slots.forEach(([time, st]) => {
+        const c = document.createElement('span');
+        const s = ST[st] || ['ok', st];
+        c.className = 'chip ' + s[0];
+        c.textContent = time.split(/[〜~\-–]/)[0].trim();
+        c.title = time + ' ' + L(st, s[1]);
+        chips.appendChild(c);
+      });
+      li.append(h, chips);
       ul.appendChild(li);
     });
+    const lg = document.createElement('li');
+    lg.className = 'legend';
+    lg.innerHTML = ['ok', 'few', 'full'].map(k => '<span class="chip ' + k + '">' + L({ ok: '空きあり', few: '残りわずか', full: '満席' }[k], { ok: 'Available', few: 'Few left', full: 'Full' }[k]) + '</span>').join('');
+    ul.appendChild(lg);
   }
   function mail() {
     const body = L('Open Day「Brain Trace」の予約をお願いします。\n\nお名前:\nご希望の日時:\n人数:\n', 'I would like to book Open Day "Brain Trace".\n\nName:\nPreferred date & time:\nNumber of people:\n');

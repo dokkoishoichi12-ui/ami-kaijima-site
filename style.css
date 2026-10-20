@@ -139,3 +139,14 @@ header.wrap{position:relative}
 .slot-wait{font-size:13px;color:var(--muted)}
 .book-btns{display:flex;flex-wrap:wrap;gap:8px}
 .book-btns .btn{margin-top:0}
+/* 予約状況:日付ごとのチップ表示 */
+.slots .day{display:grid;grid-template-columns:5.2em 1fr;gap:8px;align-items:start;padding:6px 0;border-bottom:1px solid var(--line)}
+.slots .day-h{font-size:13px;padding-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:5px;min-width:0}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:#7fe0a8}
+.chip.few::before{background:#ffd166}
+.chip.full{opacity:.45;text-decoration:line-through}
+.chip.full::before{background:var(--muted)}
+.slots .legend{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px}
+.slots .legend .chip{border:0;padding:0 6px 0 0;opacity:1;text-decoration:none;color:var(--muted)}
