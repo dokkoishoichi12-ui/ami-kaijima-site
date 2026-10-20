@@ -261,7 +261,8 @@
     $('dayPanel').hidden = !day; $('pick').hidden = !day || time === null;
     if (!day) return;
     const left = day.slots.filter(s => s[1] !== '満席').length;
-    $('left').textContent = left ? L(`(残り ${left} 枠)`, ` (${left} left)`) : L('(満席です)', ' (fully booked)');
+    const all = day.slots.length;
+    $('left').textContent = left ? L(`(残り ${left} / ${all} 枠)`, ` (${left} of ${all} left)`) : L(`(${all} 枠すべて満席です)`, ` (all ${all} slots booked)`);
     const c = $('chips'); c.innerHTML = '';
     day.slots.forEach(([t, st]) => {
       const b = document.createElement('button');
