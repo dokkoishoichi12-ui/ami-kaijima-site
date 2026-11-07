@@ -163,3 +163,7 @@ header.wrap{position:relative}
 .booking .chip.tbd::before{background:var(--muted)}
 .booking .picked{font-size:14px;margin:14px 0 8px}
 .booking > .note:last-child{margin-top:12px}
+/* 今後のオープンデイ */
+.schedule{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.schedule .label{font-family:var(--font-en);font-size:11px;letter-spacing:.25em;color:var(--pink);margin-bottom:8px}
+.schedule ul{list-style:none;display:grid;gap:4px;font-size:14px;font-variant-numeric:tabular-nums}
