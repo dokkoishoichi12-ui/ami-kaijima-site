@@ -220,21 +220,24 @@
   function setup() {
     gray = baseGray;
     labels = new Int32Array(W * H).fill(-1); nLabels = 0;
+    // 端の数ピクセルは「壁」として扱う(線が端まで届いていない所で、区画がつながってしまうのを防ぐ)
+    const EDGE = 4;
+    const open = p => { const x = p % W, y = (p / W) | 0; return gray[p] >= 128 && x >= EDGE && y >= EDGE && x < W - EDGE && y < H - EDGE; };
     const stack = new Int32Array(W * H), labIn = [], cntIn = [], cnt = [];
     for (let s = 0; s < W * H; s++) {
-      if (gray[s] < 128 || labels[s] !== -1) continue;
+      if (!open(s) || labels[s] !== -1) continue;
       const id = nLabels++; cnt[id] = 0; cntIn[id] = 0; let top = 0; stack[top++] = s; labels[s] = id;
       while (top) {
         const p = stack[--top], x = p % W, y = (p / W) | 0;
         cnt[id]++; cntIn[id] += inside[p];
         const nb = [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, y > 0 ? p - W : -1, y < H - 1 ? p + W : -1];
-        for (const q of nb) if (q >= 0 && labels[q] === -1 && gray[q] >= 128) { labels[q] = id; stack[top++] = q; }
+        for (const q of nb) if (q >= 0 && labels[q] === -1 && open(q)) { labels[q] = id; stack[top++] = q; }
       }
     }
     regionIn = cnt.map((n, l) => (cntIn[l] * 2 > n ? 1 : 0));
     // 線のふち(グレーの部分)にも隣の区画の色が回るよう、番号を少し広げておく
     paint = labels.slice();
-    for (let pass = 0; pass < 4; pass++) {
+    for (let pass = 0; pass < 9; pass++) {
       const prev = paint.slice();
       for (let p = 0; p < W * H; p++) {
         if (prev[p] >= 0) continue;
