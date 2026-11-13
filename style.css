@@ -169,6 +169,7 @@ header.wrap{position:relative}
 .schedule ul{list-style:none;display:grid;gap:4px;font-size:14px;font-variant-numeric:tabular-nums}
 /* 次回オープンデイ */
 .event-img{width:100%;margin:6px 0 18px}
-.stmt{font-family:var(--font-ja);font-size:14px;line-height:2;margin-bottom:18px}
+.stmt{font-family:var(--font-ja);font-size:min(14px,calc((100vw - 80px) / 25.5));letter-spacing:0;line-height:2.1;margin-bottom:18px}
+.stmt span{display:inline-block}
 .event-notes{list-style:none;font-size:13px;margin:0 0 14px;display:grid;gap:2px}
 .event-notes li::before{content:"・"}
